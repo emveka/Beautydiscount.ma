@@ -245,17 +245,33 @@ export default function ProductCardWithCart({
             </span>
           </Link>
 
-          {/* Section des prix - Espacement réduit sur mobile */}
+          {/* Section des prix - Une ligne sur mobile, layout normal sur desktop */}
           <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <div className="flex items-end gap-1.5 sm:gap-2">
+            {/* Mobile: Prix sur une seule ligne */}
+            <div className="flex items-center gap-2 sm:hidden">
+              {/* Prix actuel - ROUGE */}
+              <span className="text-base font-bold text-red-500">
+                {price.toLocaleString()} DH
+              </span>
+              
+              {/* Prix original barré - À côté sur la même ligne */}
+              {originalPrice > price && (
+                <span className="text-xs line-through text-gray-400">
+                  {originalPrice.toLocaleString()} DH
+                </span>
+              )}
+            </div>
+
+            {/* Desktop: Layout original avec items-end */}
+            <div className="hidden sm:flex items-end gap-2">
               {/* Prix actuel - Plus petit sur mobile - ROUGE */}
-              <span className="text-base sm:text-lg font-bold text-red-500">
+              <span className="text-lg font-bold text-red-500">
                 {price.toLocaleString()} DH
               </span>
               
               {/* Prix original barré - Plus petit sur mobile */}
               {originalPrice > price && (
-                <span className="text-xs sm:text-sm line-through text-gray-400">
+                <span className="text-sm line-through text-gray-400">
                   {originalPrice.toLocaleString()} DH
                 </span>
               )}

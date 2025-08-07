@@ -112,20 +112,20 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
           
           {/* 🚀 Skeleton Mobile + Desktop */}
           <div className="block md:hidden">
-            {/* Mobile: Scroll horizontal */}
-            <div className="flex space-x-4 overflow-x-auto pb-4 px-2">
+            {/* Mobile: Grille 2 colonnes */}
+            <div className="grid grid-cols-2 gap-4">
               {Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="flex flex-col items-center text-center flex-shrink-0">
+                <div key={index} className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-gray-200 rounded-full animate-pulse mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded w-16 animate-pulse"></div>
+                  <div className="h-6 bg-gray-200 rounded w-20 animate-pulse"></div>
                 </div>
               ))}
             </div>
           </div>
           
           <div className="hidden md:block">
-            {/* Desktop: Grille 5 colonnes */}
-            <div className="grid grid-cols-5 gap-6 md:gap-8">
+            {/* Desktop: Grille classique (3 puis 6 colonnes) */}
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
               {Array.from({ length: 6 }).map((_, index) => (
                 <div key={index} className="flex flex-col items-center text-center">
                   <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-gray-200 rounded-full animate-pulse mb-4"></div>
@@ -182,16 +182,16 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
           )}
         </div>
 
-        {/* 🚀 MOBILE: Scroll horizontal sur une ligne */}
+        {/* 🚀 MOBILE: Grille 2 colonnes avec noms complets */}
         <div className="block md:hidden">
-          <div className="flex space-x-4 overflow-x-auto pb-4 px-2 scrollbar-hide">
+          <div className="grid grid-cols-2 gap-4">
             {categories.map((category) => (
               <Link
                 key={category.id}
                 href={`/${category.slug}`}
-                className="group flex flex-col items-center text-center transition-all duration-300 hover:scale-105 flex-shrink-0"
+                className="group flex flex-col items-center text-center transition-all duration-300 hover:scale-105"
               >
-                {/* Cercle mobile compact */}
+                {/* Cercle mobile */}
                 <div className="relative mb-2 overflow-hidden rounded-full bg-gradient-to-br from-pink-100 to-pink-50 p-0.5 shadow-md group-hover:shadow-lg transition-all duration-300">
                   <div className="relative w-16 h-16 overflow-hidden rounded-full bg-white">
                      {category.imageUrl || category.mainImage ? (
@@ -224,8 +224,8 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
                   )}
                 </div>
 
-                {/* Nom de la catégorie - Plus petit et tronqué */}
-                <h3 className="font-medium text-gray-800 text-xs group-hover:text-pink-500 transition-colors duration-300 w-16 truncate">
+                {/* Nom complet de la catégorie - Multi-lignes */}
+                <h3 className="font-medium text-gray-800 text-[10px] leading-3 group-hover:text-pink-500 transition-colors duration-300 text-center px-1 min-h-[18px]">
                   {category.name}
                 </h3>
                 
@@ -234,8 +234,8 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
           </div>
         </div>
 
-        {/* 🖥️ DESKTOP: Grille 5 colonnes */}
-        <div className="hidden md:grid grid-cols-5 gap-6 md:gap-8">
+        {/* 🖥️ DESKTOP: Grille classique (3 puis 6 colonnes) */}
+        <div className="hidden md:grid grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
           {categories.map((category) => (
             <Link
               key={category.id}
