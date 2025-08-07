@@ -97,7 +97,7 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
   // État de chargement
   if (loading) {
     return (
-      <section className={`${backgroundColor} py-8 md:py-12`}>
+      <section className={`${backgroundColor} 4 md:py-6`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-6 md:mb-12">
             <h2 className={`text-xl md:text-2xl lg:text-3xl font-bold ${titleColor} mb-2 md:mb-4`}>
@@ -112,12 +112,12 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
           
           {/* 🚀 Skeleton Mobile + Desktop */}
           <div className="block md:hidden">
-            {/* Mobile: Grille 2 colonnes */}
-            <div className="grid grid-cols-2 gap-4">
-              {Array.from({ length: 6 }).map((_, index) => (
+            {/* Mobile: Grille 4 colonnes */}
+            <div className="grid grid-cols-4 gap-3">
+              {Array.from({ length: 8 }).map((_, index) => (
                 <div key={index} className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-gray-200 rounded-full animate-pulse mb-2"></div>
-                  <div className="h-6 bg-gray-200 rounded w-20 animate-pulse"></div>
+                  <div className="w-12 h-12 bg-gray-200 rounded-full animate-pulse mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
                 </div>
               ))}
             </div>
@@ -167,7 +167,7 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
   }
 
   return (
-    <section className={`${backgroundColor} py-8 md:py-12`}>
+    <section className={`${backgroundColor} py-2 md:py-6`}>
       <div className="container mx-auto px-4">
         
         {/* 🚀 Header Section - Compact sur mobile */}
@@ -182,25 +182,25 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
           )}
         </div>
 
-        {/* 🚀 MOBILE: Grille 2 colonnes avec noms complets */}
+        {/* 🚀 MOBILE: Grille 4 colonnes avec noms complets */}
         <div className="block md:hidden">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-4 gap-3">
             {categories.map((category) => (
               <Link
                 key={category.id}
                 href={`/${category.slug}`}
                 className="group flex flex-col items-center text-center transition-all duration-300 hover:scale-105"
               >
-                {/* Cercle mobile */}
+                {/* Cercle mobile plus petit pour 4 colonnes */}
                 <div className="relative mb-2 overflow-hidden rounded-full bg-gradient-to-br from-pink-100 to-pink-50 p-0.5 shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <div className="relative w-16 h-16 overflow-hidden rounded-full bg-white">
+                  <div className="relative w-12 h-12 overflow-hidden rounded-full bg-white">
                      {category.imageUrl || category.mainImage ? (
                       <Image
                         src={category.imageUrl || category.mainImage || ''}
                         alt={category.name}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        sizes="64px"
+                        sizes="48px"
                         quality={90}
                         priority={false}
                         placeholder="blur"
@@ -209,23 +209,23 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
                     ) : (
                       // Placeholder avec icône si pas d'image Firebase
                       <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-100 flex items-center justify-center">
-                        <span className="text-pink-600 font-bold text-lg">
+                        <span className="text-pink-600 font-bold text-sm">
                           {category.name.charAt(0)}
                         </span>
                       </div>
                     )}
                   </div>
                   
-                  {/* Badge pour les sous-catégories - Plus petit sur mobile */}
+                  {/* Badge pour les sous-catégories - Plus petit pour 4 colonnes */}
                   {category.subcategories && category.subcategories.length > 0 && (
-                    <div className="absolute -top-0.5 -right-0.5 bg-pink-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                    <div className="absolute -top-0.5 -right-0.5 bg-pink-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 text-[10px]">
                       {category.subcategories.length}
                     </div>
                   )}
                 </div>
 
-                {/* Nom complet de la catégorie - Multi-lignes */}
-                <h3 className="font-medium text-gray-800 text-[10px] leading-3 group-hover:text-pink-500 transition-colors duration-300 text-center px-1 min-h-[18px]">
+                {/* Nom complet de la catégorie - Plus petit pour 4 colonnes */}
+                <h3 className="font-medium text-gray-800 text-[9px] leading-3 group-hover:text-pink-500 transition-colors duration-300 text-center px-0.5 min-h-[15px]">
                   {category.name}
                 </h3>
                 

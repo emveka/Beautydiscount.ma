@@ -119,7 +119,7 @@ export default function HomePage() {
         {/* 🏷️ Section Catégories Principales */}
         <section 
           aria-label="Catégories de produits cosmétiques"
-          className="py-4"
+          className="py-2"
         >
           <header className="sr-only">
             <h2>Nos Catégories de Produits Beauté</h2>
@@ -157,7 +157,7 @@ export default function HomePage() {
         {/* 📝 Section Contenu SEO (optionnelle mais recommandée) */}
         <section 
           aria-label="À propos de BeautyDiscount.ma"
-          className="py-8 bg-white"
+          className="py-4 bg-white"
         >
           <div className="container mx-auto px-4 max-w-4xl">
             <header className="text-center mb-6">
