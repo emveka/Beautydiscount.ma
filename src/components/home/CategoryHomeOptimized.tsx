@@ -1,4 +1,4 @@
-// components/home/CategoryHomeOptimized.tsx
+// components/home/CategoryHomeOptimized.tsx - Version Mobile Single Line
 'use client'
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -32,8 +32,9 @@ interface CategoryHomeOptimizedProps {
 }
 
 /**
- * CategoryHome optimisée pour votre structure Firebase existante
- * Plus rapide car ne compte pas les produits en temps réel
+ * CategoryHome optimisée pour mobile - Ligne unique avec scroll horizontal
+ * 🚀 Mobile: Scroll horizontal sur une ligne
+ * 🖥️ Desktop: Grille classique
  */
 const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
   title = "Découvrez nos catégories",
@@ -96,28 +97,42 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
   // État de chargement
   if (loading) {
     return (
-      <section className={`${backgroundColor} py-12 md:py-16`}>
+      <section className={`${backgroundColor} py-8 md:py-12`}>
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className={`text-2xl md:text-3xl lg:text-4xl font-bold ${titleColor} mb-4`}>
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className={`text-xl md:text-2xl lg:text-3xl font-bold ${titleColor} mb-2 md:mb-4`}>
               {title}
             </h2>
             {subtitle && (
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-600 text-sm md:text-lg max-w-2xl mx-auto">
                 {subtitle}
               </p>
             )}
           </div>
           
-          {/* Skeleton de chargement */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-gray-200 rounded-full animate-pulse mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded w-20 mb-2 animate-pulse"></div>
-                <div className="h-3 bg-gray-200 rounded w-24 animate-pulse"></div>
-              </div>
-            ))}
+          {/* 🚀 Skeleton Mobile + Desktop */}
+          <div className="block md:hidden">
+            {/* Mobile: Scroll horizontal */}
+            <div className="flex space-x-4 overflow-x-auto pb-4 px-2">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="flex flex-col items-center text-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-gray-200 rounded-full animate-pulse mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-16 animate-pulse"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="hidden md:block">
+            {/* Desktop: Grille 5 colonnes */}
+            <div className="grid grid-cols-5 gap-6 md:gap-8">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="flex flex-col items-center text-center">
+                  <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-gray-200 rounded-full animate-pulse mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-20 mb-2 animate-pulse"></div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -127,16 +142,16 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
   // Gestion d'erreur
   if (error) {
     return (
-      <section className={`${backgroundColor} py-12 md:py-16`}>
+      <section className={`${backgroundColor} py-8 md:py-12`}>
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h2 className={`text-2xl md:text-3xl lg:text-4xl font-bold ${titleColor} mb-4`}>
+            <h2 className={`text-xl md:text-2xl lg:text-3xl font-bold ${titleColor} mb-4`}>
               {title}
             </h2>
             <p className="text-gray-500 mb-6">{error}</p>
             <button 
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition-colors"
+              className="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors"
             >
               Réessayer
             </button>
@@ -152,23 +167,75 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
   }
 
   return (
-    <section className={`${backgroundColor} py-12 md:py-10`}>
+    <section className={`${backgroundColor} py-8 md:py-12`}>
       <div className="container mx-auto px-4">
         
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <h2 className={`text-2xl md:text-3xl lg:text-4xl font-bold ${titleColor} mb-4`}>
+        {/* 🚀 Header Section - Compact sur mobile */}
+        <div className="text-center mb-6 md:mb-12">
+          <h2 className={`text-xl md:text-2xl lg:text-3xl font-bold ${titleColor} mb-2 md:mb-4`}>
             {title}
           </h2>
           {subtitle && (
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-sm md:text-lg max-w-2xl mx-auto">
               {subtitle}
             </p>
           )}
         </div>
 
-        {/* Grille des catégories en cercles */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
+        {/* 🚀 MOBILE: Scroll horizontal sur une ligne */}
+        <div className="block md:hidden">
+          <div className="flex space-x-4 overflow-x-auto pb-4 px-2 scrollbar-hide">
+            {categories.map((category) => (
+              <Link
+                key={category.id}
+                href={`/${category.slug}`}
+                className="group flex flex-col items-center text-center transition-all duration-300 hover:scale-105 flex-shrink-0"
+              >
+                {/* Cercle mobile compact */}
+                <div className="relative mb-2 overflow-hidden rounded-full bg-gradient-to-br from-pink-100 to-pink-50 p-0.5 shadow-md group-hover:shadow-lg transition-all duration-300">
+                  <div className="relative w-16 h-16 overflow-hidden rounded-full bg-white">
+                     {category.imageUrl || category.mainImage ? (
+                      <Image
+                        src={category.imageUrl || category.mainImage || ''}
+                        alt={category.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="64px"
+                        quality={90}
+                        priority={false}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyatEfTaFLLv0YJyJH9WJIExanAX1F3KyiMklePcLu6r/mCa5iFNLLQu3F1klLTu3YlHjWLK7+q0dJmhL1mRKJA6iXZBJSxTvKwEU5rqK/BQR"
+                      />
+                    ) : (
+                      // Placeholder avec icône si pas d'image Firebase
+                      <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-100 flex items-center justify-center">
+                        <span className="text-pink-600 font-bold text-lg">
+                          {category.name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Badge pour les sous-catégories - Plus petit sur mobile */}
+                  {category.subcategories && category.subcategories.length > 0 && (
+                    <div className="absolute -top-0.5 -right-0.5 bg-pink-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                      {category.subcategories.length}
+                    </div>
+                  )}
+                </div>
+
+                {/* Nom de la catégorie - Plus petit et tronqué */}
+                <h3 className="font-medium text-gray-800 text-xs group-hover:text-pink-500 transition-colors duration-300 w-16 truncate">
+                  {category.name}
+                </h3>
+                
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* 🖥️ DESKTOP: Grille 5 colonnes */}
+        <div className="hidden md:grid grid-cols-5 gap-6 md:gap-8">
           {categories.map((category) => (
             <Link
               key={category.id}
@@ -198,9 +265,6 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
                       </span>
                     </div>
                   )}
-                  
-                  {/* Overlay gradient au hover */}
-                  
                 </div>
                 
                 {/* Badge pour les sous-catégories */}
@@ -212,7 +276,7 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
               </div>
 
               {/* Nom de la catégorie */}
-              <h3 className="font-semibold text-gray-800 text-sm md:text-base mb-1 group-hover:text-pink-600 transition-colors duration-300">
+              <h3 className="font-semibold text-gray-800 text-sm md:text-base mb-1 group-hover:text-pink-500 transition-colors duration-300">
                 {category.name}
               </h3>
               
@@ -220,6 +284,17 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
           ))}
         </div>
       </div>
+
+      {/* 🚀 CSS pour masquer la scrollbar */}
+      <style jsx>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;  /* Internet Explorer 10+ */
+          scrollbar-width: none;  /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar { 
+          display: none;  /* Safari and Chrome */
+        }
+      `}</style>
     </section>
   );
 };

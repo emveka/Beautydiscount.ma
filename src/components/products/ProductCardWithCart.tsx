@@ -1,4 +1,4 @@
-// components/products/ProductCardWithCart.tsx - Version avec CartDrawer et calcul de réduction corrigé
+// components/products/ProductCardWithCart.tsx - Version Mobile Optimisée
 'use client'
 import Image from 'next/image';
 import Link from 'next/link';
@@ -49,11 +49,11 @@ const QuickNotification: React.FC<QuickNotificationProps> = ({
 
   return (
     <div className="fixed top-4 right-4 z-[60] pointer-events-none">
-      <div className="bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg animate-slide-in-right">
-        <div className="flex items-center space-x-2">
-          <CheckCircle className="w-4 h-4" />
-          <span className="text-sm font-medium">
-            Ajouté au panier !
+      <div className="bg-green-600 text-white px-3 py-1.5 rounded-lg shadow-lg animate-slide-in-right">
+        <div className="flex items-center space-x-1.5">
+          <CheckCircle className="w-3.5 h-3.5" />
+          <span className="text-xs font-medium">
+            Ajouté !
           </span>
         </div>
       </div>
@@ -62,14 +62,14 @@ const QuickNotification: React.FC<QuickNotificationProps> = ({
 };
 
 /**
- * ProductCardWithCart - Version optimisée avec CartDrawer et calcul de réduction corrigé
+ * ProductCardWithCart - Version Mobile Optimisée
  * 
- * 🆕 Améliorations :
- * - Calcul automatique de la réduction : originalPrice - price
- * - Ouvre automatiquement le CartDrawer après ajout
- * - Notification rapide et discrète
- * - Bouton "Acheter maintenant" qui utilise replaceCartWithSingleItem
- * - Interface épurée et moderne
+ * 🚀 Optimisations Mobile :
+ * - Boutons plus petits et compacts
+ * - Espacement réduit pour mobile
+ * - Texte et icônes plus petits sur mobile
+ * - Padding ajusté selon la taille d'écran
+ * - Notification mobile-friendly
  */
 export default function ProductCardWithCart({
   imageUrl,
@@ -97,8 +97,6 @@ export default function ProductCardWithCart({
     if (!originalPrice || originalPrice <= price) return 0;
     return originalPrice - price;
   };
-
-
 
   /**
    * 🆕 Ajoute au panier et ouvre automatiquement le CartDrawer
@@ -187,24 +185,19 @@ export default function ProductCardWithCart({
 
   return (
     <>
+      {/* 🚀 Container principal avec responsive padding */}
       <div className="w-full max-w-xs bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden relative group hover:shadow-md transition-all duration-200">
         
-        {/* Badges de réduction et stock */}
-        <div className="absolute top-2 left-2 z-10 space-y-1">
+        {/* Badges de réduction et stock - Taille réduite sur mobile */}
+        <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 z-10 space-y-1">
           {/* 🆕 Badge de réduction calculé automatiquement */}
           {actualDiscount > 0 && (
-            <div className="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
+            <div className="bg-red-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs">
               -{actualDiscount.toLocaleString()} DH
             </div>
           )}
-          {/* Alternative avec pourcentage */}
-          {/* {discountPercentage > 0 && (
-            <div className="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
-              -{discountPercentage}%
-            </div>
-          )} */}
           {!inStock && (
-            <div className="bg-gray-500 text-white text-xs font-semibold px-2 py-1 rounded">
+            <div className="bg-gray-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs">
               Rupture
             </div>
           )}
@@ -229,59 +222,59 @@ export default function ProductCardWithCart({
             {/* Badge de rupture de stock */}
             {!inStock && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                <span className="text-white font-semibold text-sm">Indisponible</span>
+                <span className="text-white font-semibold text-xs sm:text-sm">Indisponible</span>
               </div>
             )}
           </div>
         </Link>
 
-        {/* Section des détails du produit */}
-        <div className="p-4">
-          {/* Marque du produit */}
-          <p className="text-xs text-gray-500 uppercase font-medium tracking-wide mb-1">
+        {/* 🚀 Section des détails - Padding mobile optimisé */}
+        <div className="p-2.5 sm:p-4">
+          {/* Marque du produit - Texte plus petit sur mobile */}
+          <p className="text-[10px] sm:text-xs text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
             {brand}
           </p>
           
-          {/* Nom du produit avec lien */}
+          {/* Nom du produit avec lien - Hauteur réduite sur mobile */}
           <Link 
             href={`/product/${slug}`} 
-            className="block font-medium text-gray-800 text-sm hover:text-pink-600 transition-colors duration-200 leading-5 mb-3 h-10 overflow-hidden"
+            className="block font-medium text-gray-800 text-xs sm:text-sm hover:text-pink-500 transition-colors duration-200 leading-4 sm:leading-5 mb-2 sm:mb-3 h-8 sm:h-10 overflow-hidden"
           >
             <span className="line-clamp-2">
               {name}
             </span>
           </Link>
 
-          {/* Section des prix */}
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-end gap-2">
-              {/* Prix actuel */}
-              <span className="text-lg font-bold text-pink-600">
+          {/* Section des prix - Espacement réduit sur mobile */}
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="flex items-end gap-1.5 sm:gap-2">
+              {/* Prix actuel - Plus petit sur mobile - ROUGE */}
+              <span className="text-base sm:text-lg font-bold text-red-500">
                 {price.toLocaleString()} DH
               </span>
               
-              {/* Prix original barré */}
+              {/* Prix original barré - Plus petit sur mobile */}
               {originalPrice > price && (
-                <span className="text-sm line-through text-gray-400">
+                <span className="text-xs sm:text-sm line-through text-gray-400">
                   {originalPrice.toLocaleString()} DH
                 </span>
               )}
             </div> 
           </div>
 
-          {/* Boutons d'action */}
-          <div className="space-y-2">
+          {/* 🚀 Boutons d'action - Version mobile compacte */}
+          <div className="space-y-1.5 sm:space-y-2">
             
-            {/* 🆕 Bouton principal - Ajouter au panier et ouvrir le CartDrawer */}
+            {/* 🚀 Bouton principal - Taille mobile optimisée */}
             <button
               onClick={handleAddToCart}
               disabled={!inStock || isAddingToCart}
               className={`
-                w-full py-2.5 px-3 font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 relative overflow-hidden rounded-lg
+                w-full py-1.5 sm:py-2.5 px-2 sm:px-3 font-medium text-xs sm:text-sm transition-all duration-200 flex items-center justify-center space-x-1 sm:space-x-2 relative overflow-hidden rounded-md sm:rounded-lg
                 ${inStock 
                   ? justAdded
                     ? 'bg-green-600 text-white shadow-lg'
-                    : 'bg-pink-600 text-white hover:bg-pink-700 active:scale-95 shadow-md hover:shadow-lg'
+                    : 'bg-pink-500 text-white hover:bg-pink-600 active:scale-95 shadow-md hover:shadow-lg'
                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }
                 ${isAddingToCart ? 'animate-pulse' : ''}
@@ -289,43 +282,47 @@ export default function ProductCardWithCart({
             >
               {isAddingToCart ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  <span>Ajout...</span>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span className="hidden sm:inline">Ajout...</span>
+                  <span className="sm:hidden">...</span>
                 </>
               ) : justAdded ? (
                 <>
-                  <CheckCircle className="w-4 h-4 text-white" />
-                  <span>Ajouté !</span>
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                  <span className="hidden sm:inline">Ajouté !</span>
+                  <span className="sm:hidden">✓</span>
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="w-4 h-4" />
-                  <span>{inStock ? 'Ajouter au panier' : 'Indisponible'}</span>
+                  <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">{inStock ? 'Ajouter au panier' : 'Indisponible'}</span>
+                  <span className="sm:hidden">{inStock ? 'Panier' : 'Indispo'}</span>
                 </>
               )}
               
               {/* Animation de succès */}
               {justAdded && (
-                <div className="absolute inset-0 bg-green-500 opacity-20 animate-ping rounded-lg"></div>
+                <div className="absolute inset-0 bg-green-500 opacity-20 animate-ping rounded-md sm:rounded-lg"></div>
               )}
             </button>
 
-            {/* 🆕 Bouton "Acheter maintenant" */}
+            {/* 🚀 Bouton "Acheter maintenant" - Version mobile compacte */}
             {inStock && (
               <button
                 onClick={handleBuyNow}
                 disabled={isAddingToCart}
-                className="w-full py-2 px-3 border border-pink-600 text-pink-600 rounded-lg font-medium text-sm hover:bg-pink-50 transition-all duration-200 active:scale-95 flex items-center justify-center space-x-2"
+                className="w-full py-1.5 sm:py-2 px-2 sm:px-3 border border-pink-500 text-pink-500 rounded-md sm:rounded-lg font-medium text-xs sm:text-sm hover:bg-pink-50 transition-all duration-200 active:scale-95 flex items-center justify-center space-x-1 sm:space-x-2"
               >
-                <Eye className="w-4 h-4" />
-                <span>Acheter maintenant</span>
+                <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">Acheter maintenant</span>
+                <span className="sm:hidden">Acheter</span>
               </button>
             )}
           </div>
         </div>
       </div>
 
-      {/* 🆕 Notification rapide et discrète */}
+      {/* 🚀 Notification mobile-friendly */}
       <QuickNotification
         isVisible={showQuickNotification}
         productName={name}
@@ -347,6 +344,14 @@ export default function ProductCardWithCart({
         
         .animate-slide-in-right {
           animation: slide-in-right 0.3s ease-out;
+        }
+
+        /* Utilitaire line-clamp pour le texte tronqué */
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       `}</style>
     </>

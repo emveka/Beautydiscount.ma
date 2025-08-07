@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: "Découvrez notre sélection de produits de beauté et cosmétiques de grandes marques à prix discount au Maroc.",
     url: '/',
     siteName: 'BeautyDiscount.ma',
-    images: ['/BDlogo.png'],
+    images: ['/bdlogo.png'],
     locale: 'fr_MA',
     type: 'website',
   },

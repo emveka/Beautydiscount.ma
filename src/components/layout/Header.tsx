@@ -515,7 +515,7 @@ const Header: React.FC = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <Image
-                src="/BDlogo.png"
+                src="/bdlogo.png"
                 alt="BeautyDiscount.ma"
                 width={200}
                 height={50}
@@ -588,7 +588,7 @@ const Header: React.FC = () => {
           <div className="flex-shrink-0 ml-8 ">
             <Link href="/" className="flex items-center">
               <Image
-                src="/BDlogo.png"
+                src="/bdlogo.png"
                 alt="BeautyDiscount.ma"
                 width={120}
                 height={35}
