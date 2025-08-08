@@ -1,4 +1,5 @@
 // app/layout.tsx - Version avec Poppins + metadataBase ajouté
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default function RootLayout({
         <ClientWrapper>
           {children}
         </ClientWrapper>
+         <SpeedInsights />
       </body>
     </html>
   );
