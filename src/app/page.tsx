@@ -105,7 +105,7 @@ export default function HomePage() {
         
         {/* 🎯 H1 principal - Important pour SEO */}
         <h1 className="sr-only">
-          BeautyDiscount.ma - Cosmétiques, Parfums et Produits de Beauté à Prix Discount au Maroc
+          BeautyDiscount.ma - Cosmétiques, Produits Capillaires, Kératine & Protéines à Prix Discount au Maroc
         </h1>
 
         {/* 🎨 Section Hero/Banner */}
@@ -129,7 +129,7 @@ export default function HomePage() {
             title="Découvrez nos catégories"
             subtitle="Parfums, maquillage, soins du visage et corps - Toutes les grandes marques"
             backgroundColor="bg-gray-50"
-            titleColor="text-gray-900"
+            titleColor="text-rose-400"
             maxCategories={6}
           />
         </section>
@@ -149,42 +149,49 @@ export default function HomePage() {
             categoryLink="/nouveautes"
             category="accessoires"
             backgroundColor="bg-gray-50"
-            titleColor="text-gray-900"
+            titleColor="text-rose-400"
             viewAllText="Voir toutes les nouveautés"
           />
         </section>
 
-        {/* 📝 Section Contenu SEO (optionnelle mais recommandée) */}
+        {/* 📝 Section Contenu SEO - Harmonisée avec le reste de la page */}
         <section 
           aria-label="À propos de BeautyDiscount.ma"
-          className="py-4 bg-white"
+          className="py-6 bg-gray-50"
         >
-          <div className="container mx-auto px-4 max-w-4xl">
-            <header className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          {/* Utilise le même container que les autres sections */}
+          <div className="container mx-auto px-2 md:px-4">
+            <div className="text-center mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                 Votre Boutique Beauté N°1 au Maroc
               </h2>
-            </header>
-            
-            <div className="prose max-w-none text-gray-600 text-center">
-              <p className="text-lg leading-relaxed mb-4">
-                <strong>BeautyDiscount.ma</strong> est votre destination privilégiée pour tous vos produits de beauté au Maroc. 
-                Nous proposons une large gamme de <strong>cosmétiques, parfums, soins du visage et du corps</strong> des plus grandes marques internationales à des prix imbattables.
-              </p>
               
-              <div className="grid md:grid-cols-3 gap-6 mt-8 text-sm">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🚚 Livraison Rapide</h3>
-                  <p>Livraison rapide partout au Maroc. Express à Casablanca et Rabat.</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">✨ Marques Authentiques</h3>
-                  <p>Produits 100% authentiques des plus grandes marques cosmétiques mondiales.</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">💰 Prix Discount</h3>
-                  <p>Les meilleurs prix du marché marocain avec des promotions régulières.</p>
-                </div>
+              <div className="max-w-4xl mx-auto">
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6">
+                  <strong>BeautyDiscount.ma</strong> est votre destination privilégiée pour tous vos produits capillaires et de beauté au Maroc. 
+                  Nous proposons une large gamme de <strong>cosmétiques, kératine, soins du visage et du corps</strong> des plus grandes marques internationales à des prix imbattables.
+                </p>
+              </div>
+            </div>
+            
+            {/* Grid responsive comme les autres sections */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+              <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm text-center">
+                <div className="text-2xl mb-3">🚚</div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Livraison Rapide</h3>
+                <p className="text-sm text-gray-600">Livraison rapide partout au Maroc. Express à Casablanca et Rabat.</p>
+              </div>
+              
+              <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm text-center">
+                <div className="text-2xl mb-3">✨</div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Marques Authentiques</h3>
+                <p className="text-sm text-gray-600">Produits 100% authentiques des plus grandes marques cosmétiques mondiales.</p>
+              </div>
+              
+              <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm text-center">
+                <div className="text-2xl mb-3">💰</div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Prix Discount</h3>
+                <p className="text-sm text-gray-600">Les meilleurs prix du marché marocain avec des promotions régulières.</p>
               </div>
             </div>
           </div>
@@ -205,7 +212,7 @@ export default function HomePage() {
             categoryLink="/lissage-bresilien"
             category="lissage-bresilien" 
             backgroundColor="bg-gray-50"
-            titleColor="text-gray-900"
+            titleColor="text-rose-400"
             viewAllText="Voir tous les best-sellers"
           />
         </section>
@@ -225,12 +232,10 @@ export default function HomePage() {
             categoryLink="/promotions"
             category="soins-capillaires"
             backgroundColor="bg-gray-50"
-            titleColor="text-pink-900"
+            titleColor="text-rose-400"
             viewAllText="Voir toutes les promos"
           />
         </section>
-
-        
 
       </main>
     </>

@@ -40,7 +40,7 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
   title = "Découvrez nos catégories",
   subtitle = "Trouvez exactement ce que vous cherchez",
   backgroundColor = 'bg-white',
-  titleColor = 'text-gray-900',
+  titleColor = 'text-rose-400',
   maxCategories = 6
 }) => {
 
@@ -209,7 +209,7 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
                     ) : (
                       // Placeholder avec icône si pas d'image Firebase
                       <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-100 flex items-center justify-center">
-                        <span className="text-pink-600 font-bold text-sm">
+                        <span className="text-rose-500 font-bold text-sm">
                           {category.name.charAt(0)}
                         </span>
                       </div>
@@ -218,14 +218,14 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
                   
                   {/* Badge pour les sous-catégories - Plus petit pour 4 colonnes */}
                   {category.subcategories && category.subcategories.length > 0 && (
-                    <div className="absolute -top-0.5 -right-0.5 bg-pink-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 text-[10px]">
+                    <div className="absolute -top-0.5 -right-0.5 bg-rose-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 text-[10px]">
                       {category.subcategories.length}
                     </div>
                   )}
                 </div>
 
                 {/* Nom complet de la catégorie - Plus petit pour 4 colonnes */}
-                <h3 className="font-medium text-gray-800 text-[9px] leading-3 group-hover:text-pink-500 transition-colors duration-300 text-center px-0.5 min-h-[15px]">
+                <h3 className="font-medium text-gray-800 text-[9px] leading-3 group-hover:text-rose-500 transition-colors duration-300 text-center px-0.5 min-h-[15px]">
                   {category.name}
                 </h3>
                 
@@ -260,7 +260,7 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
                   ) : (
                     // Placeholder avec icône si pas d'image Firebase
                     <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-100 flex items-center justify-center">
-                      <span className="text-pink-600 font-bold text-2xl">
+                      <span className="text-rose-500 font-bold text-2xl">
                         {category.name.charAt(0)}
                       </span>
                     </div>
@@ -269,14 +269,14 @@ const CategoryHomeOptimized: React.FC<CategoryHomeOptimizedProps> = ({
                 
                 {/* Badge pour les sous-catégories */}
                 {category.subcategories && category.subcategories.length > 0 && (
-                  <div className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
                     {category.subcategories.length}
                   </div>
                 )}
               </div>
 
               {/* Nom de la catégorie */}
-              <h3 className="font-semibold text-gray-800 text-sm md:text-base mb-1 group-hover:text-pink-500 transition-colors duration-300">
+              <h3 className="font-semibold text-gray-800 text-sm md:text-base mb-1 group-hover:text-rose-500 transition-colors duration-300">
                 {category.name}
               </h3>
               

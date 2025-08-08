@@ -237,7 +237,7 @@ export default function ProductCardWithCart({
             href={`/product/${slug}`} 
             className="block font-bold text-gray-800 text-[12px] sm:text-[12px] md:text-xs lg:text-sm hover:text-pink-500 transition-colors duration-200 leading-3 sm:leading-4 md:leading-5 mb-2 sm:mb-3 h-6 sm:h-8 md:h-10 overflow-hidden"
           >
-            <span className="line-clamp-2 font-bold">
+            <span className="line-clamp-2 font-semibold">
               {name}
             </span>
           </Link>
@@ -246,7 +246,7 @@ export default function ProductCardWithCart({
           <div className="flex items-center justify-between mb-2 sm:mb-3">
             {/* Mobile : Prix sur une seule ligne */}
             <div className="flex items-center gap-2 sm:hidden">
-              <span className="text-base font-bold text-red-500">
+              <span className=" text-sm font-semibold text-red-500">
                 {price.toLocaleString()} DH
               </span>
               
@@ -283,7 +283,7 @@ export default function ProductCardWithCart({
                 ${inStock 
                   ? justAdded
                     ? 'bg-green-600 text-white shadow-lg'
-                    : 'bg-rose-500 text-white hover:bg-rose-600 active:scale-95 shadow-md hover:shadow-lg'
+                    : 'bg-rose-400 text-white hover:bg-rose-500 active:scale-95 shadow-md hover:shadow-lg'
                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }
                 ${isAddingToCart ? 'animate-pulse' : ''}
@@ -317,7 +317,7 @@ export default function ProductCardWithCart({
               <button
                 onClick={handleBuyNow}
                 disabled={isAddingToCart}
-                className="w-full py-1.5 px-2 border border-rose-500 text-rose-600 rounded-md font-medium text-xs hover:bg-pink-50 transition-all duration-200 active:scale-95 flex items-center justify-center space-x-1"
+                className="w-full py-1.5 px-2 border border-rose-400 text-rose-500 rounded-md font-medium text-xs hover:bg-pink-50 transition-all duration-200 active:scale-95 flex items-center justify-center space-x-1"
               >
                 <Eye className="w-3 h-3" />
                 <span>Acheter</span>

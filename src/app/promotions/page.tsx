@@ -429,28 +429,6 @@ const PromotionsPage: React.FC = () => {
                 <SlidersHorizontal className="w-5 h-5 text-gray-400" />
               </div>
 
-              {/* Statistiques des promotions */}
-              <div className="mb-6 p-4 bg-red-50 rounded-lg border border-red-100">
-                <h4 className="font-medium text-red-800 mb-3 flex items-center">
-                  <Percent className="w-4 h-4 mr-2" />
-                  Statistiques
-                </h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-red-700">Réduction moyenne:</span>
-                    <span className="font-medium text-red-800">{stats.avgDiscount}%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-red-700">Réduction max:</span>
-                    <span className="font-medium text-red-800">{stats.maxDiscount}%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-red-700">Économies totales:</span>
-                    <span className="font-medium text-red-800">{stats.totalSavings.toFixed(2)} DH</span>
-                  </div>
-                </div>
-              </div>
-
               {/* Pourcentage de réduction */}
               <div className="mb-6">
                 <h4 className="font-medium text-gray-800 mb-3">Réduction</h4>
@@ -574,9 +552,7 @@ const PromotionsPage: React.FC = () => {
                 <div className="bg-white/20 rounded-lg px-3 py-2">
                   Jusqu&apos;à <span className="font-medium">{stats.maxDiscount}%</span> de réduction
                 </div>
-                <div className="bg-white/20 rounded-lg px-3 py-2">
-                  <span className="font-medium">{stats.totalSavings.toFixed(0)} DH</span> d&apos;économies
-                </div>
+                
               </div>
             </div>
             
@@ -808,10 +784,7 @@ const PromotionsPage: React.FC = () => {
                         <span className="text-red-700">Réduction max:</span>
                         <span className="font-medium text-red-800">{stats.maxDiscount}%</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-red-700">Économies totales:</span>
-                        <span className="font-medium text-red-800">{stats.totalSavings.toFixed(2)} DH</span>
-                      </div>
+                      
                     </div>
                   </div>
 

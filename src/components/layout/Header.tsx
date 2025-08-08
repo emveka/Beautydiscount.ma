@@ -1,4 +1,4 @@
-// components/layout/Header.tsx - Version avec SearchBar intelligente
+// components/layout/Header.tsx - Version avec menu fixe synchronisé
 'use client'
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
@@ -8,28 +8,104 @@ import { useCartData, useCartActions } from '@/store/cartStore';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
-/**
- * Interface pour les catégories Firebase
- */
-interface Category {
-  id: string;
-  slug: string;
-  name: string;
-  subcategories?: string[];
-}
-
-interface Subcategory {
-  id: string;
-  slug: string;
-  name: string;
-  parentCategory: string;
-}
-
 interface MenuItem {
   label: string;
   href: string;
   subItems?: MenuItem[];
 }
+
+/**
+ * Menu fixe identique au MenuNavigation - Plus de chargement Firebase
+ */
+const MENU_ITEMS: MenuItem[] = [
+  {
+    label: 'Lissages',
+    href: '/lissages',
+    subItems: [
+      { label: 'Lissage Brésilien', href: '/lissages/lissage-bresilien' },
+      { label: 'Kératine', href: '/lissages/keratine' },
+      { label: 'Protéines', href: '/lissages/proteines' },
+      { label: 'Botox Capillaire', href: '/lissages/botox-capillaire' },
+      { label: 'Tanino', href: '/lissages/tanino' },
+      { label: 'Lissage Japonais', href: '/lissages/lissage-japonais' }
+    ]
+  },
+  {
+    label: 'Soins Capillaires',
+    href: '/soins-capillaires',
+    subItems: [
+      { label: 'Shampoings', href: '/soins-capillaires/shampoings' },
+      { label: 'Masques Capillaires', href: '/soins-capillaires/masques' },
+      { label: 'Huiles Capillaires', href: '/soins-capillaires/huiles' },
+      { label: 'Sérums', href: '/soins-capillaires/serums' },
+      { label: 'Sprays Protecteurs', href: '/soins-capillaires/sprays' }
+    ]
+  },
+  {
+    label: 'Parfums',
+    href: '/parfums',
+    subItems: [
+      { label: 'Parfums Femme', href: '/parfums/femme' },
+      { label: 'Parfums Homme', href: '/parfums/homme' },
+      { label: 'Parfums Unisexe', href: '/parfums/unisexe' },
+      { label: 'Eaux de Toilette', href: '/parfums/eau-de-toilette' },
+      { label: 'Eaux de Parfum', href: '/parfums/eau-de-parfum' }
+    ]
+  },
+  {
+    label: 'Maquillage',
+    href: '/maquillage',
+    subItems: [
+      { label: 'Fond de Teint', href: '/maquillage/fond-de-teint' },
+      { label: 'Rouge à Lèvres', href: '/maquillage/rouge-a-levres' },
+      { label: 'Mascara', href: '/maquillage/mascara' },
+      { label: 'Fards à Paupières', href: '/maquillage/fards-paupieres' },
+      { label: 'Blush', href: '/maquillage/blush' },
+      { label: 'Eyeliner', href: '/maquillage/eyeliner' }
+    ]
+  },
+  {
+    label: 'Soins Visage',
+    href: '/soins-visage',
+    subItems: [
+      { label: 'Crèmes Hydratantes', href: '/soins-visage/cremes-hydratantes' },
+      { label: 'Sérums Anti-âge', href: '/soins-visage/serums-anti-age' },
+      { label: 'Nettoyants', href: '/soins-visage/nettoyants' },
+      { label: 'Masques Visage', href: '/soins-visage/masques' },
+      { label: 'Contour des Yeux', href: '/soins-visage/contour-yeux' }
+    ]
+  },
+  {
+    label: 'Cosmétique Coréen',
+    href: '/cosmetique-coreen',
+    subItems: [
+      { label: 'K-Beauty Routine', href: '/cosmetique-coreen/k-beauty-routine' },
+      { label: 'Masques Coréens', href: '/cosmetique-coreen/masques' },
+      { label: 'Sérums K-Beauty', href: '/cosmetique-coreen/serums' },
+      { label: 'BB & CC Creams', href: '/cosmetique-coreen/bb-cc-creams' }
+    ]
+  },
+  {
+    label: 'Onglerie',
+    href: '/onglerie',
+    subItems: [
+      { label: 'Vernis à Ongles', href: '/onglerie/vernis-ongles' },
+      { label: 'Base & Top Coat', href: '/onglerie/base-top-coat' },
+      { label: 'Soins des Ongles', href: '/onglerie/soins-ongles' },
+      { label: 'Accessoires Nail Art', href: '/onglerie/accessoires-nail-art' }
+    ]
+  },
+  {
+    label: 'Accessoires',
+    href: '/accessoires',
+    subItems: [
+      { label: 'Pinceaux Maquillage', href: '/accessoires/pinceaux-maquillage' },
+      { label: 'Éponges & Blenders', href: '/accessoires/eponges-blenders' },
+      { label: 'Miroirs', href: '/accessoires/miroirs' },
+      { label: 'Trousses Beauté', href: '/accessoires/trousses-beaute' }
+    ]
+  }
+];
 
 /**
  * Interface pour les produits dans la recherche
@@ -47,6 +123,16 @@ interface Product {
     category: string;
     subcategory: string;
   }>;
+}
+
+/**
+ * Interface pour les catégories dans la recherche
+ */
+interface Category {
+  id: string;
+  slug: string;
+  name: string;
+  subcategories?: string[];
 }
 
 /**
@@ -418,13 +504,13 @@ const SearchBar: React.FC<{
 
 /**
  * Header avec menu mobile intégré + CartDrawer + SearchBar intelligente
+ * MENU FIXE - Plus de chargement Firebase pour les catégories
  */
 const Header: React.FC = () => {
   const [mobileServiceOpen, setMobileServiceOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   
   // État pour éviter l'erreur d'hydratation
   const [isHydrated, setIsHydrated] = useState(false);
@@ -436,59 +522,6 @@ const Header: React.FC = () => {
   // Attendre l'hydratation avant d'afficher le badge
   useEffect(() => {
     setIsHydrated(true);
-  }, []);
-
-  // Charger les catégories Firebase
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const [categoriesSnapshot, subcategoriesSnapshot] = await Promise.all([
-          getDocs(query(collection(db, 'categories'), orderBy('name'))),
-          getDocs(query(collection(db, 'subcategories'), orderBy('name')))
-        ]);
-        
-        const categoriesData = categoriesSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as Category[];
-        
-        const subcategoriesData = subcategoriesSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as Subcategory[];
-
-        // Générer le menu
-        const items: MenuItem[] = [];
-
-        categoriesData.forEach(category => {
-          const categorySubcategories = subcategoriesData.filter(
-            sub => sub.parentCategory === category.slug
-          );
-
-          const subItems = categorySubcategories.map(sub => ({
-            label: sub.name,
-            href: `/${category.slug}/${sub.slug}`
-          }));
-
-          items.push({
-            label: category.name,
-            href: `/${category.slug}`,
-            subItems: subItems.length > 0 ? subItems : undefined
-          });
-        });
-
-        // Ajouter les liens fixes
-        items.push({ label: 'Promotions', href: '/promotions' });
-        items.push({ label: 'Marques', href: '/marques' });
-        items.push({ label: 'Conseils Beauté', href: '/conseils' });
-
-        setMenuItems(items);
-      } catch (error) {
-        console.error('Erreur lors du chargement des catégories:', error);
-      }
-    };
-
-    loadCategories();
   }, []);
 
   // Fonction pour fermer tous les dropdowns
@@ -637,7 +670,7 @@ const Header: React.FC = () => {
                   <div>
                     <p className="text-xs text-gray-500 mb-2">Recherches populaires :</p>
                     <div className="flex flex-wrap gap-1.5">
-                      {['Mascara', 'Fond de teint', 'Rouge à lèvres', 'Crème hydratante'].map((term) => (
+                      {['Lissage', 'Kératine', 'Parfum', 'Mascara'].map((term) => (
                         <button
                           key={term}
                           className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs hover:bg-pink-100 hover:text-pink-700 transition-colors duration-200"
@@ -739,7 +772,7 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* MENU MOBILE - CATÉGORIES */}
+        {/* MENU MOBILE - CATÉGORIES (MENU FIXE) */}
         {mobileCategoriesOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t border-gray-200 z-50">
             <div className="max-h-[70vh] overflow-y-auto">
@@ -751,7 +784,7 @@ const Header: React.FC = () => {
                 </div>
                 
                 <ul className="space-y-0">
-                  {menuItems.map((item) => (
+                  {MENU_ITEMS.map((item) => (
                     <li key={item.label}>
                       {item.subItems ? (
                         <div>
@@ -811,6 +844,26 @@ const Header: React.FC = () => {
                       )}
                     </li>
                   ))}
+                  
+                  {/* Liens supplémentaires à la fin du menu mobile */}
+                  <li className="border-t border-gray-200 mt-2 pt-2">
+                    <Link
+                      href="/promotions"
+                      className="flex items-center justify-between px-3 py-2.5 text-red-600 hover:bg-red-50 hover:text-red-700 transition-all duration-200 font-medium text-sm"
+                      onClick={closeAllDropdowns}
+                    >
+                      <span>🔥 Promotions</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/conseils-beaute"
+                      className="flex items-center justify-between px-3 py-2.5 text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-all duration-200 font-medium text-sm"
+                      onClick={closeAllDropdowns}
+                    >
+                      <span>Conseils Beauté</span>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>

@@ -454,7 +454,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             <div className="space-y-2 sm:space-y-3">
               <button
                 onClick={proceedToCheckout}
-                className="w-full bg-pink-500 text-white py-2 sm:py-3 px-4 rounded-lg font-semibold hover:bg-pink-600 transition-colors duration-200 flex items-center justify-center space-x-2 text-sm sm:text-base"
+                className="w-full bg-rose-400 text-white py-2 sm:py-3 px-4 rounded-lg font-semibold hover:bg-rose-500 transition-colors duration-200 flex items-center justify-center space-x-2 text-sm sm:text-base"
               >
                 <CreditCard className="w-4 h-4" />
                 <span>Passer la commande</span>
@@ -470,7 +470,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* 🚀 Garanties - SEULEMENT sur desktop */}
-            <div className="hidden sm:block pt-4 mt-4 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+            <div className="hidden sm:block pt-4 mt-4 border-t border-gray-200 grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
               <div className="flex items-center space-x-2 text-gray-600">
                 <Truck className="w-3 h-3 text-green-600 flex-shrink-0" />
                 <span>Livraison partout</span>

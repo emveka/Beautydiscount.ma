@@ -711,7 +711,7 @@ const CategoryPageClient: React.FC<CategoryPageClientProps> = ({
                   </p>
                   <button
                     onClick={resetAllFilters}
-                    className="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+                    className="px-4 py-2 bg-rose-400 text-white rounded-lg hover:bg-rose-500 transition-colors"
                   >
                     Réinitialiser les filtres
                   </button>
