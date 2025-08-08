@@ -1,11 +1,11 @@
-// components/home/ProductCategoryHome.tsx - Layout Prix Uniforme comme Promotions
+// components/home/ProductCategoryHome.tsx - Optimisé avec ProductCardWithCart
 'use client'
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 import { collection, query, where, limit, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import ProductCardWithCart from '@/components/products/ProductCardWithCart';
 
 /**
  * Interface pour la structure des catégories Firebase
@@ -43,11 +43,12 @@ interface ProductCategoryHomeProps {
 }
 
 /**
- * ProductCategoryHome - Avec layout prix identique aux promotions
+ * ProductCategoryHome - Utilise maintenant ProductCardWithCart pour la cohérence
  * 
- * ✅ Layout prix uniforme : items-end, text-lg, text-pink-600
- * ✅ Comportement identique à la page promotions
- * ✅ Responsive design optimisé
+ * ✅ Utilise le vrai composant ProductCardWithCart optimisé mobile
+ * ✅ Tailles de boutons cohérentes sur tous les écrans
+ * ✅ Responsive design uniforme
+ * ✅ Comportement du panier identique partout
  */
 const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
   title,
@@ -145,8 +146,8 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
             </h2>
           </div>
           
-          {/* Skeleton de chargement */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+          {/* Skeleton de chargement - Grille responsive optimisée */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
             {Array.from({ length: 6 }).map((_, index) => (
               <div key={index} className="animate-pulse">
                 <div className="bg-gray-200 aspect-square rounded-lg mb-3"></div>
@@ -220,147 +221,34 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
           {/* Lien "Voir plus" - Petit et discret */}
           <Link 
             href={categoryLink}
-            className="flex items-center space-x-1 text-sm text-pink-500 hover:text-pink-600 font-medium transition-colors duration-200 group"
+            className="flex items-center space-x-1 text-sm text-rose-500 hover:text-rose-600 font-medium transition-colors duration-200 group"
           >
             <span>{viewAllText}</span>
             <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
           </Link>
         </div>
 
-        {/* 🎯 Grille de produits avec cards personnalisées - Layout comme Promotions */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+        {/* 🎯 Grille de produits avec ProductCardWithCart optimisé */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
           {products.map((product) => (
             <div key={product.productId} className="flex justify-center">
               
-              {/* 🎯 ProductCard avec layout prix identique aux promotions */}
-              <div className="w-full max-w-xs bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden relative group hover:shadow-md transition-all duration-200">
-                
-                {/* Badges de réduction et stock */}
-                <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 z-10 space-y-1">
-                  {/* Badge de réduction */}
-                  {product.originalPrice > product.price && (
-                    <div className="bg-red-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs">
-                      -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-                    </div>
-                  )}
-                  {!product.inStock && (
-                    <div className="bg-gray-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs">
-                      Rupture
-                    </div>
-                  )}
-                </div>
-
-                {/* Container de l'image */}
-                <Link href={`/product/${product.slug}`} className="block">
-                  <div className="relative overflow-hidden aspect-square">
-                    <Image
-                      src={product.imageUrl}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
-                      quality={85}
-                      priority={false}
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                    />
-                    
-                    {/* Overlay au hover */}
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-200" />
-                    
-                    {/* Badge de rupture de stock */}
-                    {!product.inStock && (
-                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <span className="text-white font-semibold text-xs sm:text-sm">Indisponible</span>
-                      </div>
-                    )}
-                  </div>
-                </Link>
-
-                {/* Section des détails */}
-                <div className="p-2.5 sm:p-4">
-                  {/* Marque du produit */}
-                  <p className="text-[10px] sm:text-xs text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
-                    {product.brand}
-                  </p>
-                  
-                  {/* Nom du produit avec lien */}
-                  <Link 
-                    href={`/product/${product.slug}`} 
-                    className="block font-medium text-gray-800 text-xs sm:text-sm hover:text-pink-500 transition-colors duration-200 leading-4 sm:leading-5 mb-2 sm:mb-3 h-8 sm:h-10 overflow-hidden"
-                  >
-                    <span className="line-clamp-2">
-                      {product.name}
-                    </span>
-                  </Link>
-
-                  {/* 🎯 Section des prix - EXACTEMENT comme dans Promotions */}
-                  <div className="flex items-center justify-between mb-2 sm:mb-3">
-                    <div className="flex items-end gap-1.5 sm:gap-2">
-                      {/* Prix actuel - MÊME STYLE que Promotions */}
-                      <span className="text-base sm:text-lg font-bold text-red-500">
-                        {product.price.toLocaleString()} DH
-                      </span>
-                      
-                      {/* Prix original barré - MÊME STYLE que Promotions */}
-                      {product.originalPrice > product.price && (
-                        <span className="text-xs sm:text-sm line-through text-gray-400">
-                          {product.originalPrice.toLocaleString()} DH
-                        </span>
-                      )}
-                    </div> 
-                  </div>
-
-                  {/* Boutons d'action - Version compacte */}
-                  <div className="space-y-1.5 sm:space-y-2">
-                    
-                    {/* Bouton principal */}
-                    <button
-                      className={`
-                        w-full py-1.5 sm:py-2.5 px-2 sm:px-3 font-medium text-xs sm:text-sm transition-all duration-200 flex items-center justify-center space-x-1 sm:space-x-2 relative overflow-hidden rounded-md sm:rounded-lg
-                        ${product.inStock 
-                          ? 'bg-pink-500 text-white hover:bg-pink-600 active:scale-95 shadow-md hover:shadow-lg'
-                          : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                        }
-                      `}
-                    >
-                      <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 4M7 13h10M7 13L5.5 7M7 13l4.5 4.5m4.5-4.5L12 17.5" />
-                      </svg>
-                      <span className="hidden sm:inline">{product.inStock ? 'Ajouter au panier' : 'Indisponible'}</span>
-                      <span className="sm:hidden">{product.inStock ? 'Panier' : 'Indispo'}</span>
-                    </button>
-
-                    {/* Bouton "Acheter maintenant" */}
-                    {product.inStock && (
-                      <button
-                        className="w-full py-1.5 sm:py-2 px-2 sm:px-3 border border-pink-500 text-pink-500 rounded-md sm:rounded-lg font-medium text-xs sm:text-sm hover:bg-pink-50 transition-all duration-200 active:scale-95 flex items-center justify-center space-x-1 sm:space-x-2"
-                      >
-                        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <span className="hidden sm:inline">Acheter maintenant</span>
-                        <span className="sm:hidden">Acheter</span>
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
+              {/* 🎯 Utilisation du vrai ProductCardWithCart optimisé mobile */}
+              <ProductCardWithCart
+                imageUrl={product.imageUrl}
+                brand={product.brand}
+                name={product.name}
+                price={product.price}
+                originalPrice={product.originalPrice}
+                discount={product.discount}
+                slug={product.slug}
+                inStock={product.inStock}
+                productId={product.productId}
+              />
             </div>
           ))}
         </div>
       </div>
-
-      {/* CSS pour line-clamp */}
-      <style jsx>{`
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
     </section>
   );
 };

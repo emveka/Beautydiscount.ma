@@ -1,5 +1,5 @@
 'use client'
-// components/layout/MenuNavigation.tsx
+// components/layout/MenuNavigation.tsx - Adapté pour petits écrans
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
@@ -36,8 +36,8 @@ interface MenuItem {
 }
 
 /**
- * MenuNavigation - Menu horizontal DESKTOP UNIQUEMENT avec Poppins Bold
- * Le menu mobile est géré par le Header
+ * MenuNavigation - Menu horizontal adapté pour tous les écrans
+ * Fonts rétrécies sur les petits écrans pour rester sur une ligne
  */
 const MenuNavigation: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -110,8 +110,8 @@ const MenuNavigation: React.FC = () => {
   if (!isLoaded) {
     return (
       <nav className="bg-white shadow-sm border-b border-gray-200 relative z-40">
-        <div className="container mx-auto px-4">
-          <div className="h-16"></div> {/* Espace réservé pour éviter le saut */}
+        <div className="container mx-auto px-2 md:px-4">
+          <div className="h-12 md:h-16"></div> {/* Espace réservé adaptatif */}
         </div>
       </nav>
     );
@@ -119,68 +119,103 @@ const MenuNavigation: React.FC = () => {
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200 relative z-40">
-      <div className="container mx-auto px-4">
-        {/* Menu Desktop UNIQUEMENT */}
-        <div className="hidden lg:flex items-center justify-between">
-          <ul className="flex items-center">
-            {menuItems.map((item) => (
-              <li
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(item.label)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link
-                  href={item.href}
-                  className="flex items-center space-x-1 px-4 py-4 text-gray-700 hover:text-pink-600 font-poppins font-semibold transition-colors duration-200 border-b-2 border-transparent hover:border-pink-300"
+      <div className="container mx-auto px-2 sm:px-4">
+        
+        {/* 🎯 Menu responsive - Visible sur tous les écrans avec fonts adaptatives */}
+        <div className="hidden sm:flex items-center justify-between">
+          
+          {/* Menu principal avec overflow horizontal si nécessaire */}
+          <div className="flex-1 overflow-x-auto">
+            <ul className="flex items-center whitespace-nowrap">
+              {menuItems.map((item) => (
+                <li
+                  key={item.label}
+                  className="relative flex-shrink-0"
+                  onMouseEnter={() => handleMouseEnter(item.label)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  <span className="font-semibold">{item.label}</span>
-                  {item.subItems && <ChevronDown className="w-4 h-4" />}
-                </Link>
-
-                {/* Dropdown Menu */}
-                {item.subItems && activeDropdown === item.label && (
-                  <div className="absolute top-full left-0 bg-white shadow-xl border border-gray-200 z-50 py-6 px-8 rounded-b-lg"
-                       style={{ width: '600px', maxWidth: '90vw' }}>
-                    
-                    <h3 className="text-lg font-poppins font-semibold text-pink-600 mb-4 border-b border-pink-200 pb-2">
+                  <Link
+                    href={item.href}
+                    className="flex items-center space-x-1 px-2 sm:px-3 lg:px-4 py-3 sm:py-4 text-gray-700 hover:text-pink-600 font-poppins font-semibold transition-colors duration-200 border-b-2 border-transparent hover:border-pink-300"
+                  >
+                    {/* 🎯 Texte adaptatif selon la taille d'écran */}
+                    <span className="font-semibold text-xs sm:text-sm lg:text-base">
                       {item.label}
-                    </h3>
+                    </span>
+                    {item.subItems && (
+                      <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
+                    )}
+                  </Link>
 
-                    <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-                      {item.subItems.map((subItem) => (
-                        <Link
-                          key={subItem.label}
-                          href={subItem.href}
-                          className="block py-2 text-gray-700 hover:text-pink-600 transition-colors duration-200 text-sm font-poppins font-semibold"
-                        >
-                          {subItem.label}
-                        </Link>
-                      ))}
+                  {/* Dropdown Menu */}
+                  {item.subItems && activeDropdown === item.label && (
+                    <div className="absolute top-full left-0 bg-white shadow-xl border border-gray-200 z-50 py-4 sm:py-6 px-4 sm:px-8 rounded-b-lg"
+                         style={{ width: '400px', maxWidth: '90vw' }}>
+                      
+                      <h3 className="text-sm sm:text-lg font-poppins font-semibold text-pink-600 mb-3 sm:mb-4 border-b border-pink-200 pb-2">
+                        {item.label}
+                      </h3>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-1 sm:gap-y-2">
+                        {item.subItems.map((subItem) => (
+                          <Link
+                            key={subItem.label}
+                            href={subItem.href}
+                            className="block py-1.5 sm:py-2 text-gray-700 hover:text-pink-600 transition-colors duration-200 text-xs sm:text-sm font-poppins font-semibold"
+                          >
+                            {subItem.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div className="flex items-center space-x-6">
-            <Link 
-              href="/marques" 
-              className="text-sm text-gray-600 hover:text-pink-600 font-poppins font-semibold transition-colors duration-200"
-            >
-              Toutes nos Marques
-            </Link>
+          {/* 🎯 Liens secondaires - Adaptés pour petits écrans */}
+          <div className="flex items-center space-x-2 sm:space-x-4 lg:space-x-6 ml-2 sm:ml-4">
+            
             <Link 
               href="/conseils-beaute" 
-              className="text-sm text-gray-600 hover:text-pink-600 font-poppins font-semibold transition-colors duration-200"
+              className="text-xs sm:text-sm text-gray-600 hover:text-pink-600 font-poppins font-semibold transition-colors duration-200 whitespace-nowrap"
             >
-              Conseils Beauté
+              <span className="hidden lg:inline">Conseils Beauté</span>
+              <span className="lg:hidden">Conseils</span>
             </Link>
           </div>
         </div>
 
-        {/* 🚫 MENU MOBILE SUPPRIMÉ - Géré par le Header */}
+        {/* 🎯 Menu ultra-compact pour très petits écrans (xs) */}
+        <div className="flex sm:hidden items-center">
+          <div className="w-full overflow-x-auto">
+            <ul className="flex items-center space-x-1 whitespace-nowrap py-2">
+              {menuItems.slice(0, 6).map((item) => (
+                <li key={item.label} className="flex-shrink-0">
+                  <Link
+                    href={item.href}
+                    className="block px-2 py-2 text-gray-700 hover:text-pink-600 font-poppins font-semibold transition-colors duration-200 text-xs border-b-2 border-transparent hover:border-pink-300"
+                  >
+                    {/* Raccourcir les noms sur très petits écrans */}
+                    {item.label.length > 8 ? item.label.slice(0, 8) + '.' : item.label}
+                  </Link>
+                </li>
+              ))}
+              {/* Lien "Plus" si trop d'éléments */}
+              {menuItems.length > 6 && (
+                <li className="flex-shrink-0">
+                  <Link
+                    href="/categories"
+                    className="block px-2 py-2 text-gray-600 hover:text-pink-600 font-poppins font-semibold transition-colors duration-200 text-xs"
+                  >
+                    Plus...
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
   );

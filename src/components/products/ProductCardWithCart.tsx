@@ -1,4 +1,4 @@
-// components/products/ProductCardWithCart.tsx - Version Mobile Optimisée
+// components/products/ProductCardWithCart.tsx - Petits boutons partout + nom en bold
 'use client'
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,7 +23,6 @@ interface ProductCardWithCartProps {
 
 /**
  * Composant de notification simplifiée pour l'ajout au panier
- * 🆕 Version simplifiée car le CartDrawer s'ouvre automatiquement
  */
 interface QuickNotificationProps {
   isVisible: boolean;
@@ -40,7 +39,7 @@ const QuickNotification: React.FC<QuickNotificationProps> = ({
     if (isVisible) {
       const timer = setTimeout(() => {
         onClose();
-      }, 2000); // Notification rapide de 2 secondes
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [isVisible, onClose]);
@@ -62,14 +61,12 @@ const QuickNotification: React.FC<QuickNotificationProps> = ({
 };
 
 /**
- * ProductCardWithCart - Version Mobile Optimisée
+ * ProductCardWithCart - Petits boutons sur TOUS les écrans
  * 
- * 🚀 Optimisations Mobile :
- * - Boutons plus petits et compacts
- * - Espacement réduit pour mobile
- * - Texte et icônes plus petits sur mobile
- * - Padding ajusté selon la taille d'écran
- * - Notification mobile-friendly
+ * 🎯 Optimisations :
+ * - Boutons compacts partout (py-1.5, text-xs, icônes w-3 h-3)
+ * - Nom du produit en BOLD
+ * - Carte garde sa taille normale
  */
 export default function ProductCardWithCart({
   imageUrl,
@@ -82,7 +79,7 @@ export default function ProductCardWithCart({
   productId
 }: ProductCardWithCartProps) {
   
-  // 🆕 Actions du panier depuis Zustand avec CartDrawer
+  // Actions du panier depuis Zustand avec CartDrawer
   const { addItem, toggleCart, replaceCartWithSingleItem } = useCartActions();
   
   // États pour les interactions utilisateur
@@ -91,7 +88,7 @@ export default function ProductCardWithCart({
   const [showQuickNotification, setShowQuickNotification] = useState(false);
 
   /**
-   * 🆕 Calcule la réduction réelle : originalPrice - price
+   * Calcule la réduction réelle : originalPrice - price
    */
   const getActualDiscount = () => {
     if (!originalPrice || originalPrice <= price) return 0;
@@ -99,7 +96,7 @@ export default function ProductCardWithCart({
   };
 
   /**
-   * 🆕 Ajoute au panier et ouvre automatiquement le CartDrawer
+   * Ajoute au panier et ouvre automatiquement le CartDrawer
    */
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -132,7 +129,7 @@ export default function ProductCardWithCart({
       // Notification rapide
       setShowQuickNotification(true);
       
-      // 🆕 Ouvrir automatiquement le CartDrawer après un délai
+      // Ouvrir automatiquement le CartDrawer après un délai
       setTimeout(() => {
         toggleCart();
       }, 500);
@@ -146,7 +143,7 @@ export default function ProductCardWithCart({
   };
 
   /**
-   * 🆕 Acheter maintenant - Remplace le panier et va au checkout
+   * Acheter maintenant - Remplace le panier et va au checkout
    */
   const handleBuyNow = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -180,17 +177,17 @@ export default function ProductCardWithCart({
     }
   };
 
-  // 🆕 Calculer la réduction réelle
+  // Calculer la réduction réelle
   const actualDiscount = getActualDiscount();
 
   return (
     <>
-      {/* 🚀 Container principal avec responsive padding */}
+      {/* Container principal - TAILLE NORMALE CONSERVÉE */}
       <div className="w-full max-w-xs bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden relative group hover:shadow-md transition-all duration-200">
         
-        {/* Badges de réduction et stock - Taille réduite sur mobile */}
+        {/* Badges de réduction et stock - Taille normale conservée */}
         <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 z-10 space-y-1">
-          {/* 🆕 Badge de réduction calculé automatiquement */}
+          {/* Badge de réduction calculé automatiquement */}
           {actualDiscount > 0 && (
             <div className="bg-red-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs">
               -{actualDiscount.toLocaleString()} DH
@@ -203,7 +200,7 @@ export default function ProductCardWithCart({
           )}
         </div>
 
-        {/* Container de l'image */}
+        {/* Container de l'image - TAILLE NORMALE CONSERVÉE */}
         <Link href={`/product/${slug}`} className="block">
           <div className="relative overflow-hidden aspect-square">
             <Image
@@ -228,33 +225,31 @@ export default function ProductCardWithCart({
           </div>
         </Link>
 
-        {/* 🚀 Section des détails - Padding mobile optimisé */}
+        {/* Section des détails - TAILLE NORMALE CONSERVÉE */}
         <div className="p-2.5 sm:p-4">
-          {/* Marque du produit - Texte plus petit sur mobile */}
-          <p className="text-[10px] sm:text-xs text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
+          {/* 🎯 Marque du produit - TAILLES DÉGRESSIVES */}
+          <p className="text-[8px] sm:text-[10px] md:text-xs lg:text-sm text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
             {brand}
           </p>
           
-          {/* Nom du produit avec lien - Hauteur réduite sur mobile */}
+          {/* 🎯 Nom du produit avec lien - BOLD + TAILLES DÉGRESSIVES */}
           <Link 
             href={`/product/${slug}`} 
-            className="block font-medium text-gray-800 text-xs sm:text-sm hover:text-pink-500 transition-colors duration-200 leading-4 sm:leading-5 mb-2 sm:mb-3 h-8 sm:h-10 overflow-hidden"
+            className="block font-bold text-gray-800 text-[10px] sm:text-xs md:text-sm lg:text-base hover:text-pink-500 transition-colors duration-200 leading-3 sm:leading-4 md:leading-5 mb-2 sm:mb-3 h-6 sm:h-8 md:h-10 overflow-hidden"
           >
-            <span className="line-clamp-2">
+            <span className="line-clamp-2 font-bold">
               {name}
             </span>
           </Link>
 
-          {/* Section des prix - Une ligne sur mobile, layout normal sur desktop */}
+          {/* Section des prix - TAILLE NORMALE CONSERVÉE */}
           <div className="flex items-center justify-between mb-2 sm:mb-3">
-            {/* Mobile: Prix sur une seule ligne */}
+            {/* Mobile : Prix sur une seule ligne */}
             <div className="flex items-center gap-2 sm:hidden">
-              {/* Prix actuel - ROUGE */}
               <span className="text-base font-bold text-red-500">
                 {price.toLocaleString()} DH
               </span>
               
-              {/* Prix original barré - À côté sur la même ligne */}
               {originalPrice > price && (
                 <span className="text-xs line-through text-gray-400">
                   {originalPrice.toLocaleString()} DH
@@ -262,14 +257,12 @@ export default function ProductCardWithCart({
               )}
             </div>
 
-            {/* Desktop: Layout original avec items-end */}
+            {/* Desktop : Layout normal avec items-end */}
             <div className="hidden sm:flex items-end gap-2">
-              {/* Prix actuel - Plus petit sur mobile - ROUGE */}
               <span className="text-lg font-bold text-red-500">
                 {price.toLocaleString()} DH
               </span>
               
-              {/* Prix original barré - Plus petit sur mobile */}
               {originalPrice > price && (
                 <span className="text-sm line-through text-gray-400">
                   {originalPrice.toLocaleString()} DH
@@ -278,19 +271,19 @@ export default function ProductCardWithCart({
             </div> 
           </div>
 
-          {/* 🚀 Boutons d'action - Version mobile compacte */}
-          <div className="space-y-1.5 sm:space-y-2">
+          {/* 🎯 Boutons d'action - PETITS SUR TOUS LES ÉCRANS */}
+          <div className="space-y-1.5">
             
-            {/* 🚀 Bouton principal - Taille mobile optimisée */}
+            {/* Bouton principal - PETIT PARTOUT */}
             <button
               onClick={handleAddToCart}
               disabled={!inStock || isAddingToCart}
               className={`
-                w-full py-1.5 sm:py-2.5 px-2 sm:px-3 font-medium text-xs sm:text-sm transition-all duration-200 flex items-center justify-center space-x-1 sm:space-x-2 relative overflow-hidden rounded-md sm:rounded-lg
+                w-full py-1.5 px-2 font-medium text-xs transition-all duration-200 flex items-center justify-center space-x-1 relative overflow-hidden rounded-md
                 ${inStock 
                   ? justAdded
                     ? 'bg-green-600 text-white shadow-lg'
-                    : 'bg-pink-500 text-white hover:bg-pink-600 active:scale-95 shadow-md hover:shadow-lg'
+                    : 'bg-rose-500 text-white hover:bg-rose-600 active:scale-95 shadow-md hover:shadow-lg'
                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }
                 ${isAddingToCart ? 'animate-pulse' : ''}
@@ -298,47 +291,43 @@ export default function ProductCardWithCart({
             >
               {isAddingToCart ? (
                 <>
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  <span className="hidden sm:inline">Ajout...</span>
-                  <span className="sm:hidden">...</span>
+                  <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>...</span>
                 </>
               ) : justAdded ? (
                 <>
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                  <span className="hidden sm:inline">Ajouté !</span>
-                  <span className="sm:hidden">✓</span>
+                  <CheckCircle className="w-3 h-3 text-white" />
+                  <span>✓</span>
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">{inStock ? 'Ajouter au panier' : 'Indisponible'}</span>
-                  <span className="sm:hidden">{inStock ? 'Panier' : 'Indispo'}</span>
+                  <ShoppingCart className="w-3 h-3" />
+                  <span>{inStock ? 'Panier' : 'Indispo'}</span>
                 </>
               )}
               
               {/* Animation de succès */}
               {justAdded && (
-                <div className="absolute inset-0 bg-green-500 opacity-20 animate-ping rounded-md sm:rounded-lg"></div>
+                <div className="absolute inset-0 bg-green-500 opacity-20 animate-ping rounded-md"></div>
               )}
             </button>
 
-            {/* 🚀 Bouton "Acheter maintenant" - Version mobile compacte */}
+            {/* Bouton "Acheter maintenant" - PETIT PARTOUT */}
             {inStock && (
               <button
                 onClick={handleBuyNow}
                 disabled={isAddingToCart}
-                className="w-full py-1.5 sm:py-2 px-2 sm:px-3 border border-pink-500 text-pink-500 rounded-md sm:rounded-lg font-medium text-xs sm:text-sm hover:bg-pink-50 transition-all duration-200 active:scale-95 flex items-center justify-center space-x-1 sm:space-x-2"
+                className="w-full py-1.5 px-2 border border-rose-500 text-rose-600 rounded-md font-medium text-xs hover:bg-pink-50 transition-all duration-200 active:scale-95 flex items-center justify-center space-x-1"
               >
-                <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Acheter maintenant</span>
-                <span className="sm:hidden">Acheter</span>
+                <Eye className="w-3 h-3" />
+                <span>Acheter</span>
               </button>
             )}
           </div>
         </div>
       </div>
 
-      {/* 🚀 Notification mobile-friendly */}
+      {/* Notification */}
       <QuickNotification
         isVisible={showQuickNotification}
         productName={name}
@@ -362,7 +351,6 @@ export default function ProductCardWithCart({
           animation: slide-in-right 0.3s ease-out;
         }
 
-        /* Utilitaire line-clamp pour le texte tronqué */
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;
