@@ -228,14 +228,14 @@ export default function ProductCardWithCart({
         {/* Section des détails - TAILLE NORMALE CONSERVÉE */}
         <div className="p-2.5 sm:p-4">
           {/* 🎯 Marque du produit - TAILLES DÉGRESSIVES */}
-          <p className="text-[6px] sm:text-[7px] md:text-[10px] lg:text-xs text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
+          <p className="text-[9px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
             {brand}
           </p>
           
           {/* 🎯 Nom du produit avec lien - BOLD + TAILLES DÉGRESSIVES */}
           <Link 
             href={`/product/${slug}`} 
-            className="block font-bold text-gray-800 text-[8px] sm:text-[10px] md:text-xs lg:text-sm hover:text-pink-500 transition-colors duration-200 leading-3 sm:leading-4 md:leading-5 mb-2 sm:mb-3 h-6 sm:h-8 md:h-10 overflow-hidden"
+            className="block font-bold text-gray-800 text-[12px] sm:text-[12px] md:text-xs lg:text-sm hover:text-pink-500 transition-colors duration-200 leading-3 sm:leading-4 md:leading-5 mb-2 sm:mb-3 h-6 sm:h-8 md:h-10 overflow-hidden"
           >
             <span className="line-clamp-2 font-bold">
               {name}
