@@ -1,5 +1,5 @@
 'use client'
-// components/layout/MenuNavigation.tsx - Version avec menu fixe (sans Firebase)
+// components/layout/MenuNavigation.tsx - Menu fixe, labels toujours sur une ligne + font qui baisse
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
@@ -10,123 +10,70 @@ interface MenuItem {
   subItems?: MenuItem[];
 }
 
-/**
- * Menu fixe - Plus rapide, pas de chargement Firebase
- */
 const MENU_ITEMS: MenuItem[] = [
-  {
-    label: 'Lissages',
-    href: '/lissages',
-    subItems: [
-      { label: 'Lissage Brésilien', href: '/lissages/lissage-bresilien' },
-      { label: 'Lissage Tanin', href: '/lissages/lissage-tanin' },
-      { label: 'Kits Mini Lissage', href: '/lissages/kits-mini-lissages' },
-      { label: 'Botox Capillaire', href: '/lissages/botox-capillaire' },
-      { label: 'Packs Lissages', href: '/lissages/pack-lissages' },
-      { label: 'Lisseurs', href: '/lissages/lisseurs' }
-    ]
-  },
-  {
-    label: 'Soins Capillaires',
-    href: '/soins-capillaires',
-    subItems: [
-      { label: 'Shampooings', href: '/soins-capillaires/shampooings' },
-      { label: 'Masques Capillaires', href: '/soins-capillaires/masques' },
-      { label: 'Huiles Capillaires', href: '/soins-capillaires/huiles' },
-      { label: 'Sérums', href: '/soins-capillaires/serums' },
-      { label: 'Sprays Protecteurs', href: '/soins-capillaires/sprays' }
-    ]
-  },
-  {
-    label: 'Parfums',
-    href: '/parfums',
-    subItems: [
-      { label: 'Parfums Femme', href: '/parfums/femme' },
-      { label: 'Parfums Homme', href: '/parfums/homme' },
-      { label: 'Parfums Unisexe', href: '/parfums/unisexe' },
-      { label: 'Eaux de Toilette', href: '/parfums/eau-de-toilette' },
-      { label: 'Eaux de Parfum', href: '/parfums/eau-de-parfum' }
-    ]
-  },
-  {
-    label: 'Maquillage',
-    href: '/maquillage',
-    subItems: [
-      { label: 'Fond de Teint', href: '/maquillage/fond-de-teint' },
-      { label: 'Rouge à Lèvres', href: '/maquillage/rouge-a-levres' },
-      { label: 'Mascara', href: '/maquillage/mascara' },
-      { label: 'Fards à Paupières', href: '/maquillage/fards-paupieres' },
-      { label: 'Blush', href: '/maquillage/blush' },
-      { label: 'Eyeliner', href: '/maquillage/eyeliner' }
-    ]
-  },
-  {
-    label: 'Soins Visage',
-    href: '/soins-visage',
-    subItems: [
-      { label: 'Crèmes Hydratantes', href: '/soins-visage/cremes-hydratantes' },
-      { label: 'Sérums Anti-âge', href: '/soins-visage/serums-anti-age' },
-      { label: 'Nettoyants', href: '/soins-visage/nettoyants' },
-      { label: 'Masques Visage', href: '/soins-visage/masques' },
-      { label: 'Contour des Yeux', href: '/soins-visage/contour-yeux' }
-    ]
-  },
-  {
-    label: 'Cosmétique Coréen',
-    href: '/cosmetique-coreen',
-    subItems: [
-      { label: 'K-Beauty Routine', href: '/cosmetique-coreen/k-beauty-routine' },
-      { label: 'Masques Coréens', href: '/cosmetique-coreen/masques' },
-      { label: 'Sérums K-Beauty', href: '/cosmetique-coreen/serums' },
-      { label: 'BB & CC Creams', href: '/cosmetique-coreen/bb-cc-creams' }
-    ]
-  },
-  {
-    label: 'Onglerie',
-    href: '/onglerie',
-    subItems: [
-      { label: 'Vernis à Ongles', href: '/onglerie/vernis-ongles' },
-      { label: 'Base & Top Coat', href: '/onglerie/base-top-coat' },
-      { label: 'Soins des Ongles', href: '/onglerie/soins-ongles' },
-      { label: 'Accessoires Nail Art', href: '/onglerie/accessoires-nail-art' }
-    ]
-  },
-  {
-    label: 'Accessoires',
-    href: '/accessoires',
-    subItems: [
-      { label: 'Pinceaux Maquillage', href: '/accessoires/pinceaux-maquillage' },
-      { label: 'Éponges & Blenders', href: '/accessoires/eponges-blenders' },
-      { label: 'Miroirs', href: '/accessoires/miroirs' },
-      { label: 'Trousses Beauté', href: '/accessoires/trousses-beaute' }
-    ]
-  }
+  { label: 'Lissages', href: '/lissages', subItems: [
+    { label: 'Lissage Brésilien', href: '/lissages/lissage-bresilien' },
+    { label: 'Kératine', href: '/lissages/keratine' },
+    { label: 'Protéines', href: '/lissages/proteines' },
+    { label: 'Botox Capillaire', href: '/lissages/botox-capillaire' },
+    { label: 'Tanino', href: '/lissages/tanino' },
+    { label: 'Lissage Japonais', href: '/lissages/lissage-japonais' },
+  ]},
+  { label: 'Soins Capillaires', href: '/soins-capillaires', subItems: [
+    { label: 'Shampoings', href: '/soins-capillaires/shampoings' },
+    { label: 'Masques Capillaires', href: '/soins-capillaires/masques' },
+    { label: 'Huiles Capillaires', href: '/soins-capillaires/huiles' },
+    { label: 'Sérums', href: '/soins-capillaires/serums' },
+    { label: 'Sprays Protecteurs', href: '/soins-capillaires/sprays' },
+  ]},
+  { label: 'Maquillage', href: '/maquillage', subItems: [
+    { label: 'Fond de Teint', href: '/maquillage/fond-de-teint' },
+    { label: 'Rouge à Lèvres', href: '/maquillage/rouge-a-levres' },
+    { label: 'Mascara', href: '/maquillage/mascara' },
+    { label: 'Fards à Paupières', href: '/maquillage/fards-paupieres' },
+    { label: 'Blush', href: '/maquillage/blush' },
+    { label: 'Eyeliner', href: '/maquillage/eyeliner' },
+  ]},
+  { label: 'Soins Visage', href: '/soins-visage', subItems: [
+    { label: 'Crèmes Hydratantes', href: '/soins-visage/cremes-hydratantes' },
+    { label: 'Sérums Anti-âge', href: '/soins-visage/serums-anti-age' },
+    { label: 'Nettoyants', href: '/soins-visage/nettoyants' },
+    { label: 'Masques Visage', href: '/soins-visage/masques' },
+    { label: 'Contour des Yeux', href: '/soins-visage/contour-yeux' },
+  ]},
+  { label: 'Cosmétique Coréen', href: '/cosmetique-coreen', subItems: [
+    { label: 'K-Beauty Routine', href: '/cosmetique-coreen/k-beauty-routine' },
+    { label: 'Masques Coréens', href: '/cosmetique-coreen/masques' },
+    { label: 'Sérums K-Beauty', href: '/cosmetique-coreen/serums' },
+    { label: 'BB & CC Creams', href: '/cosmetique-coreen/bb-cc-creams' },
+  ]},
+  { label: 'Onglerie', href: '/onglerie', subItems: [
+    { label: 'Vernis à Ongles', href: '/onglerie/vernis-ongles' },
+    { label: 'Base & Top Coat', href: '/onglerie/base-top-coat' },
+    { label: 'Soins des Ongles', href: '/onglerie/soins-ongles' },
+    { label: 'Accessoires Nail Art', href: '/onglerie/accessoires-nail-art' },
+  ]},
+  { label: 'Accessoires', href: '/accessoires', subItems: [
+    { label: 'Pinceaux Maquillage', href: '/accessoires/pinceaux-maquillage' },
+    { label: 'Éponges & Blenders', href: '/accessoires/eponges-blenders' },
+    { label: 'Miroirs', href: '/accessoires/miroirs' },
+    { label: 'Trousses Beauté', href: '/accessoires/trousses-beaute' },
+  ]},
 ];
 
-/**
- * MenuNavigation - Version fixe sans chargement
- */
 const MenuNavigation: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-
-  const handleMouseEnter = (label: string) => {
-    setActiveDropdown(label);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveDropdown(null);
-  };
+  const handleMouseEnter = (label: string) => setActiveDropdown(label);
+  const handleMouseLeave = () => setActiveDropdown(null);
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200">
       <div className="container mx-auto px-4">
-        
-        {/* Menu Desktop uniquement */}
+        {/* Desktop seulement */}
         <div className="hidden lg:flex items-center justify-between">
-          
-          {/* Menu principal - Catégories à gauche */}
+          {/* Catégories */}
           <div className="flex-1">
-            <ul className="flex items-center">
+            <ul className="flex items-center gap-x-3 xl:gap-x-4 2xl:gap-x-6">
               {MENU_ITEMS.map((item) => (
                 <li
                   key={item.label}
@@ -136,39 +83,57 @@ const MenuNavigation: React.FC = () => {
                 >
                   <Link
                     href={item.href}
-                    className="flex items-center px-3 lg:px-4 py-4 text-gray-700 hover:text-rose-400 font-semibold transition-colors duration-200 border-b-2 border-transparent hover:border-pink-300"
+                    className="
+                      flex items-center
+                      px-3 xl:px-4 2xl:px-5
+                      py-3
+                      font-semibold text-gray-700 hover:text-rose-400
+                      border-b-2 border-transparent hover:border-rose-300
+                      transition-colors duration-200
+                    "
                   >
-                    <span className="text-sm lg:text-base">
+                    {/* ⬇️ Empêche toute coupure + police qui s’adapte */}
+                    <span className="
+                      whitespace-nowrap leading-none tracking-tight
+                      text-[clamp(12px,0.95vw,16px)]
+                    ">
                       {item.label}
                     </span>
-                    {item.subItems && item.subItems.length > 0 && (
-                      <ChevronDown className="w-4 h-4 ml-1" />
-                    )}
+                    {item.subItems?.length ? (
+                      <ChevronDown className="ml-1 w-3.5 h-3.5" />
+                    ) : null}
                   </Link>
 
                   {/* Dropdown */}
-                  {item.subItems && item.subItems.length > 0 && activeDropdown === item.label && (
-                    <div className="absolute left-0 top-full bg-white border border-gray-200 shadow-xl rounded-b-lg min-w-[500px] max-w-[600px] py-6 px-8 z-50">
-                      
-                      {/* Titre du dropdown */}
-                      <div className="border-b border-rose-200 pb-3 mb-4">
-                        <h3 className="font-bold text-rose-400 text-lg">
+                  {item.subItems?.length && activeDropdown === item.label && (
+                    <div className="
+                      absolute left-0 top-full bg-white border border-gray-200 shadow-xl rounded-b-lg
+                      min-w-[380px] xl:min-w-[520px] 2xl:min-w-[560px]
+                      max-w-[640px] py-5 xl:py-6 px-6 xl:px-8 z-50
+                    ">
+                      <div className="border-b border-pink-200 pb-3 mb-4">
+                        <h3 className="font-bold text-rose-400
+                          text-[clamp(13px,1.05vw,18px)] leading-none tracking-tight">
                           {item.label}
                         </h3>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-[12px] text-gray-500 mt-1">
                           {item.subItems.length} sous-catégories disponibles
                         </p>
                       </div>
 
-                      {/* Liste des sous-éléments en grid */}
-                      <div className="grid grid-cols-2 gap-x-6 gap-y-2">
-                        {item.subItems.map((subItem) => (
+                      <div className="grid grid-cols-2 gap-x-5 gap-y-2">
+                        {item.subItems.map((sub) => (
                           <Link
-                            key={subItem.label}
-                            href={subItem.href}
-                            className="block px-3 py-2 text-sm text-gray-700 hover:text-rose-500 hover:bg-pink-50 rounded-md transition-all duration-200 font-medium"
+                            key={sub.label}
+                            href={sub.href}
+                            className="
+                              block px-2 py-2 rounded-md transition-all duration-200 font-medium
+                              hover:text-rose-400 hover:bg-pink-50
+                              text-[clamp(12px,0.9vw,14px)] leading-none tracking-tight
+                              text-gray-700
+                            "
                           >
-                            • {subItem.label}
+                            • {sub.label}
                           </Link>
                         ))}
                       </div>
@@ -180,22 +145,26 @@ const MenuNavigation: React.FC = () => {
           </div>
 
           {/* Liens secondaires à droite */}
-          <div className="flex items-center space-x-6 flex-shrink-0">
-            <Link 
-              href="/promotions" 
-              className="text-sm font-semibold text-rose-600 hover:text-rose-700 transition-colors duration-200 bg-red-50 px-3 py-2 rounded-md hover:bg-red-100"
+          <div className="items-center space-x-3 xl:space-x-5 2xl:space-x-6 flex-shrink-0 hidden lg:flex">
+            <Link
+              href="/promotions"
+              className="
+                font-semibold text-red-600 hover:text-red-700
+                bg-red-50 px-3 py-2 rounded-md hover:bg-red-100
+                text-[clamp(11px,0.85vw,14px)] leading-none tracking-tight
+              "
             >
               🔥 Promotions
             </Link>
-            <Link 
-              href="/conseils-beaute" 
-              className="text-sm font-semibold text-gray-600 hover:text-rose-400 transition-colors duration-200"
+            <Link
+              href="/conseils-beaute"
+              className="font-semibold text-gray-600 hover:text-rose-400
+                         text-[clamp(11px,0.85vw,14px)] leading-none tracking-tight"
             >
               Conseils Beauté
             </Link>
           </div>
         </div>
-
       </div>
     </nav>
   );

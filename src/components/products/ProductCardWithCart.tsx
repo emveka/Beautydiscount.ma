@@ -145,37 +145,42 @@ export default function ProductCardWithCart({
   /**
    * Acheter maintenant - Remplace le panier et va au checkout
    */
-  const handleBuyNow = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+// Dans ProductCardWithCart.tsx - VERSION SIMPLIFIÉE :
+
+const handleBuyNow = async (e: React.MouseEvent) => {
+  e.preventDefault();
+  e.stopPropagation();
+  
+  if (!inStock || isAddingToCart) return;
+  
+  setIsAddingToCart(true);
+  
+  try {
+    console.log('🛒 Achat direct - Ajout au panier existant');
     
-    if (!inStock || isAddingToCart) return;
+    // Simplement ajouter au panier (comme le bouton normal)
+    addItem({
+      productId,
+      name,
+      brand,
+      price,
+      originalPrice,
+      imageUrl,
+      slug,
+      inStock
+    });
     
-    setIsAddingToCart(true);
+    console.log('✅ Produit ajouté, redirection vers checkout...');
     
-    try {
-      // Remplacer le panier avec ce produit uniquement
-      replaceCartWithSingleItem({
-        productId,
-        name,
-        brand,
-        price,
-        originalPrice,
-        imageUrl,
-        slug,
-        inStock
-      }, 1);
-      
-      // Redirection vers checkout après un court délai
-      setTimeout(() => {
-        window.location.href = '/checkout';
-      }, 300);
-      
-    } catch (error) {
-      console.error('Erreur lors de l\'achat direct:', error);
-      setIsAddingToCart(false);
-    }
-  };
+    // Redirection immédiate vers checkout
+    window.location.href = '/checkout';
+    
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'achat direct:', error);
+  } finally {
+    setIsAddingToCart(false);
+  }
+};
 
   // Calculer la réduction réelle
   const actualDiscount = getActualDiscount();
@@ -235,7 +240,7 @@ export default function ProductCardWithCart({
           {/* 🎯 Nom du produit avec lien - BOLD + TAILLES DÉGRESSIVES */}
           <Link 
             href={`/product/${slug}`} 
-            className="block font-bold text-gray-800 text-[12px] sm:text-[12px] md:text-xs lg:text-sm hover:text-pink-500 transition-colors duration-200 leading-3 sm:leading-4 md:leading-5 mb-2 sm:mb-3 h-6 sm:h-8 md:h-10 overflow-hidden"
+            className="block font-bold text-gray-800 text-[12px] sm:text-[12px] md:text-xs lg:text-sm hover:text-rose-400 transition-colors duration-200 leading-3 sm:leading-4 md:leading-5 mb-2 sm:mb-3 h-6 sm:h-8 md:h-10 overflow-hidden"
           >
             <span className="line-clamp-2 font-semibold">
               {name}

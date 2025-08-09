@@ -101,15 +101,17 @@ const CheckoutPage = () => {
   }, [moroccanCities, errors]);
 
   // Vérification état panier avec toutes les dépendances
-  useEffect(() => {
-    if (items.length > 0 && initialItemsRef.current.length === 0) {
-      initialItemsRef.current = items;
-    }
-
+useEffect(() => {
+  // Attendre un peu pour laisser le temps à Zustand de se synchroniser
+  const timer = setTimeout(() => {
     if (items.length === 0 && initialItemsRef.current.length === 0 && !isCreatingOrderRef.current) {
+      console.log('🚨 Redirection vers cart - panier vide détecté');
       router.push('/cart');
     }
-  }, [items, router]); // Ajout de 'items' dans les dépendances
+  }, 500); // Délai de 500ms
+
+  return () => clearTimeout(timer);
+}, [items, router]);
 
   // Charger les données sauvegardées avec toutes les dépendances
   useEffect(() => {
