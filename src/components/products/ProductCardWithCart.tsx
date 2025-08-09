@@ -232,35 +232,35 @@ const handleBuyNow = async (e: React.MouseEvent) => {
 
         {/* Section des détails - TAILLE NORMALE CONSERVÉE */}
         <div className="p-2.5 sm:p-4">
-          {/* 🎯 Marque du produit - TAILLES DÉGRESSIVES */}
-          <p className="text-[9px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
-            {brand}
-          </p>
-          
-          {/* 🎯 Nom du produit avec lien - BOLD + TAILLES DÉGRESSIVES */}
-          <Link 
-            href={`/product/${slug}`} 
-            className="block font-bold text-gray-800 text-[12px] sm:text-[12px] md:text-xs lg:text-sm hover:text-rose-400 transition-colors duration-200 leading-3 sm:leading-4 md:leading-5 mb-2 sm:mb-3 h-6 sm:h-8 md:h-10 overflow-hidden"
-          >
-            <span className="line-clamp-2 font-semibold">
-              {name}
-            </span>
-          </Link>
+          {/* 🎯 Marque du produit - taille fluide */}
+<p className="text-[clamp(9px,0.85vw,12px)] text-gray-500 uppercase font-medium tracking-wide mb-0.5 sm:mb-1">
+  {brand}
+</p>
 
-          {/* Section des prix - TAILLE NORMALE CONSERVÉE */}
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            {/* Mobile : Prix sur une seule ligne */}
-            <div className="flex items-center gap-2 sm:hidden">
-              <span className=" text-sm font-semibold text-red-500">
-                {price.toLocaleString()} DH
-              </span>
-              
-              {originalPrice > price && (
-                <span className="text-xs line-through text-gray-400">
-                  {originalPrice.toLocaleString()} DH
-                </span>
-              )}
-            </div>
+{/* 🎯 Nom du produit avec lien - taille fluide */}
+<Link 
+  href={`/product/${slug}`} 
+  className="block font-bold text-gray-800 text-[clamp(12px,1vw,16px)] hover:text-rose-400 transition-colors duration-200 leading-snug mb-2 sm:mb-3 h-10 overflow-hidden"
+>
+  <span className="line-clamp-2 font-semibold">
+    {name}
+  </span>
+</Link>
+
+{/* 🎯 Section des prix - taille fluide */}
+<div className="flex items-center justify-between mb-2 sm:mb-3">
+  {/* Mobile : Prix sur une seule ligne */}
+  <div className="flex items-center gap-2 sm:hidden">
+    <span className="font-semibold text-red-500 text-[clamp(13px,1.2vw,18px)]">
+      {price.toLocaleString()} DH
+    </span>
+    
+    {originalPrice > price && (
+      <span className="line-through text-gray-400 text-[clamp(11px,0.9vw,14px)]">
+        {originalPrice.toLocaleString()} DH
+      </span>
+    )}
+  </div>
 
             {/* Desktop : Layout normal avec items-end */}
             <div className="hidden sm:flex items-end gap-2">
