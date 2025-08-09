@@ -1262,17 +1262,8 @@ const ProductPageClient: React.FC<ProductPageClientProps> = ({
               </button>
             </div>
 
-            {/* Prix sticky mobile */}
-            <div className="mt-3 text-center">
-              <span className="text-lg font-bold text-rose-600">
-                {productData.price?.toLocaleString()} DH
-              </span>
-              {hasDiscount && productData.originalPrice && (
-                <span className="text-sm text-gray-400 line-through ml-2">
-                  {productData.originalPrice.toLocaleString()} DH
-                </span>
-              )}
-            </div>
+           
+            
           </div>
 
           {/* Espace pour éviter que le contenu soit masqué par la barre sticky mobile */}

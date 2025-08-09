@@ -251,12 +251,14 @@ const handleBuyNow = async (e: React.MouseEvent) => {
 <div className="flex items-center justify-between mb-2 sm:mb-3">
   {/* Mobile : Prix sur une seule ligne */}
   <div className="flex items-center gap-2 sm:hidden">
-    <span className="font-semibold text-red-500 text-[clamp(13px,1.2vw,18px)]">
-      {price.toLocaleString()} DH
-    </span>
+    <span
+  className={`font-semibold text-red-500 whitespace-nowrap leading-none tracking-tight text-[clamp(12px,1.2vw,16px)]`}
+>
+  {price.toLocaleString()} DH
+</span>
     
     {originalPrice > price && (
-      <span className="line-through text-gray-400 text-[clamp(11px,0.9vw,14px)]">
+      <span className="line-through text-gray-400 text-[clamp(10px,0.9vw,14px)]">
         {originalPrice.toLocaleString()} DH
       </span>
     )}
