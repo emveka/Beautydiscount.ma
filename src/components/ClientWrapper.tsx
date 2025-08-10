@@ -1,16 +1,17 @@
-// components/ClientWrapper.tsx - Version corrigée sans erreur de hooks
+// components/ClientWrapper.tsx - Version avec Footer intégré
 'use client'
 import React, { useEffect, useState } from 'react';
 import TopHeader from "@/components/layout/TopHeader";
 import Header from "@/components/layout/Header";
 import MenuNavigation from "@/components/layout/MenuNavigation";
+import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import { useCartData } from '@/store/cartStore';
 
 /**
  * Wrapper client pour gérer l'hydratation SSR/CSR avec Zustand
  * Évite les erreurs "getServerSnapshot should be cached"
- * 🆕 Inclut maintenant le CartDrawer global - VERSION CORRIGÉE
+ * 🆕 Inclut maintenant le CartDrawer global + Footer - VERSION CORRIGÉE
  */
 const ClientWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -47,6 +48,8 @@ const ClientWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         <main>
           {children}
         </main>
+        {/* 🆕 Footer ajouté dans la version statique */}
+        <Footer />
       </>
     );
   }
@@ -60,6 +63,8 @@ const ClientWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <main>
         {children}
       </main>
+      {/* 🆕 Footer ajouté dans la version hydratée */}
+      <Footer />
       
       {/* 🆕 CartDrawer global - accessible depuis toute l'application */}
       <CartDrawer 

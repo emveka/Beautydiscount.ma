@@ -134,108 +134,138 @@ export default function HomePage() {
           />
         </section>
 
-        {/* 🆕 Section Nouveautés */}
+        {/* 🆕 Section Lissages Proteines kératine */}
         <section 
-          aria-label="Dernières nouveautés cosmétiques"
+          aria-label="Lissage Protéine kératine"
           className="py-4"
         >
           <header className="sr-only">
-            <h2>Nouveautés Beauté 2025</h2>
-            <p>Découvrez les derniers produits cosmétiques arrivés en magasin</p>
+            <h2>Lissages, Kératine et Protéine Capillaires</h2>
+            <p>Découvrez nos produits pour lissage brésilien, tanin et petits kits pour lissages ainsi que les lisseurs professionnels</p>
           </header>
           
           <ProductCategoryHome 
-            title="Nouveautés"
-            categoryLink="/nouveautes"
-            category="accessoires"
+            title="Lissages, Kératines, Protéines"
+            categoryLink="/lissages"
+            category="lissages"
             backgroundColor="bg-gray-50"
             titleColor="text-rose-400"
-            viewAllText="Voir toutes les nouveautés"
+            viewAllText="Voir tout"
+            randomize={true}  // 🔄 activer le mélange
           />
         </section>
 
-        {/* 📝 Section Contenu SEO - Harmonisée avec le reste de la page */}
-        <section 
-          aria-label="À propos de BeautyDiscount.ma"
-          className="py-6 bg-gray-50"
-        >
-          {/* Utilise le même container que les autres sections */}
-          <div className="container mx-auto px-2 md:px-4">
-            <div className="text-center mb-8">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
-                Votre Boutique Beauté N°1 au Maroc
-              </h2>
-              
-              <div className="max-w-4xl mx-auto">
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6">
-                  <strong>BeautyDiscount.ma</strong> est votre destination privilégiée pour tous vos produits capillaires et de beauté au Maroc. 
-                  Nous proposons une large gamme de <strong>cosmétiques, kératine, soins du visage et du corps</strong> des plus grandes marques internationales à des prix imbattables.
-                </p>
-              </div>
-            </div>
-            
-            {/* Grid responsive comme les autres sections */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
-              <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm text-center">
-                <div className="text-2xl mb-3">🚚</div>
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Livraison Rapide</h3>
-                <p className="text-sm text-gray-600">Livraison rapide partout au Maroc. Express à Casablanca et Rabat.</p>
-              </div>
-              
-              <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm text-center">
-                <div className="text-2xl mb-3">✨</div>
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Marques Authentiques</h3>
-                <p className="text-sm text-gray-600">Produits 100% authentiques des plus grandes marques cosmétiques mondiales.</p>
-              </div>
-              
-              <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm text-center">
-                <div className="text-2xl mb-3">💰</div>
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Prix Discount</h3>
-                <p className="text-sm text-gray-600">Les meilleurs prix du marché marocain avec des promotions régulières.</p>
-              </div>
-            </div>
+        {/* 📝 Section Contenu SEO - Version redesignée plus jolie */}
+<section
+  aria-label="À propos de BeautyDiscount.ma"
+  className="py-12 bg-gradient-to-br from-gray-50 via-white to-pink-50/30 relative overflow-hidden"
+>
+  {/* Éléments décoratifs en arrière-plan */}
+  <div className="absolute top-0 left-0 w-32 h-32 bg-pink-100/40 rounded-full -translate-x-16 -translate-y-16"></div>
+  <div className="absolute bottom-0 right-0 w-40 h-40 bg-rose-100/30 rounded-full translate-x-20 translate-y-20"></div>
+  <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-pink-300 rounded-full animate-pulse"></div>
+  <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-rose-400 rounded-full animate-pulse delay-1000"></div>
+  
+  {/* Utilise le même container que les autres sections */}
+  <div className="container mx-auto px-2 md:px-4 relative z-10">
+    <div className="text-center mb-8">
+      {/* Titre avec soulignement rose personnalisé */}
+      <div className="inline-block mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 relative">
+          Votre Boutique Beauté N°1 au Maroc
+          {/* Soulignement rose décoratif */}
+          <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3/4 h-0.5 bg-gradient-to-r from-transparent via-pink-500 to-transparent"></div>
+          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-rose-400 to-transparent"></div>
+        </h2>
+      </div>
+     
+      {/* Conteneur avec effet de carte subtil */}
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-white/50 relative">
+          {/* Petit accent décoratif en haut */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-1 bg-gradient-to-r from-pink-400 to-rose-500 rounded-full"></div>
+          
+          <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6">
+            <strong>BeautyDiscount.ma</strong> est votre destination privilégiée pour tous vos produits capillaires et de beauté au Maroc.
+            Nous proposons une large gamme de <strong>cosmétiques, kératine, soins du visage et du corps</strong> des plus grandes marques internationales à des prix imbattables.
+            Profitez de notre <strong>livraison dans tout le Maroc</strong> avec possibilité de <strong>paiement à la livraison</strong> pour votre tranquillité d&apos;esprit.
+          </p>
+          
+          {/* Petits éléments décoratifs en bas */}
+          <div className="flex justify-center space-x-2 mt-4">
+            <div className="w-2 h-2 bg-pink-300 rounded-full"></div>
+            <div className="w-2 h-2 bg-rose-300 rounded-full"></div>
+            <div className="w-2 h-2 bg-pink-300 rounded-full"></div>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        {/* 🔥 Section Meilleures Ventes */}
+        {/* 🔥 Section Produits Capillaires */}
         <section 
-          aria-label="Produits les plus vendus"
+          aria-label="Nos Produits Capillaires"
           className="py-4"
         >
           <header className="sr-only">
-            <h2>Meilleures Ventes Cosmétiques</h2>
-            <p>Les produits de beauté préférés de nos clients marocains</p>
+            <h2>Nos Produits Capillaires</h2>
+            <p>Vos produits Shampooings, Masques , huiles et sérms pour vos cheveux au maroc</p>
           </header>
           
           <ProductCategoryHome 
-            title="Meilleures Ventes"
-            categoryLink="/lissage-bresilien"
-            category="lissage-bresilien" 
+            title="Nos Produits Capillaires"
+            categoryLink="/soins-capillaires"
+            category="soins-capillaires" 
             backgroundColor="bg-gray-50"
             titleColor="text-rose-400"
-            viewAllText="Voir tous les best-sellers"
+            viewAllText="Voir tout"
+            randomize={true}  // 🔄 activer le mélange
           />
         </section>
 
-        {/* 💰 Section Promotions */}
+        {/* 💰 Section Cosmétiques Coréens */}
         <section 
-          aria-label="Offres promotionnelles et réductions"
+          aria-label="Nos produits Cosmétiques Coréens"
           className="py-4"
         >
           <header className="sr-only">
-            <h2>Promotions et Réductions Beauté</h2>
-            <p>Profitez de nos offres exceptionnelles sur les cosmétiques de marque</p>
+            <h2>Nos produits Cosmétiques Coréens</h2>
+            <p>Profitez de nos produits cosmétiques coréens comme les sérums, masques et routines K-beauty</p>
           </header>
           
           <ProductCategoryHome 
-            title="Promotions"
-            categoryLink="/promotions"
-            category="soins-capillaires"
+            title="Cosmétique Coréen"
+            categoryLink="/cosmetique-coreen"
+            category="cosmetique-coreen"
             backgroundColor="bg-gray-50"
             titleColor="text-rose-400"
-            viewAllText="Voir toutes les promos"
+            viewAllText="Voir tout"
+            randomize={true}  // 🔄 activer le mélange
           />
         </section>
+
+        {/* 🆕 Section Pack Capillaires */}
+        <section 
+          aria-label="Nos Packs Capillaires"
+          className="py-4"
+        >
+          <header className="sr-only">
+            <h2>Nos Packs Capillaires</h2>
+            <p>Découvrez nos packs disponibles de vos produits préférés</p>
+          </header>
+          
+          <ProductCategoryHome 
+            title="Nos Packs Capillaires"
+            categoryLink="/pack-capillaires"
+            category="pack-capillaires"
+            backgroundColor="bg-gray-50"
+            titleColor="text-rose-400"
+            viewAllText="Voir tout"
+            randomize={true}  // 🔄 activer le mélange
+          />
+        </section>
+
 
       </main>
     </>

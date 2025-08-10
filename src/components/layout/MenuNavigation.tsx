@@ -13,26 +13,23 @@ interface MenuItem {
 const MENU_ITEMS: MenuItem[] = [
   { label: 'Lissages', href: '/lissages', subItems: [
     { label: 'Lissage Brésilien', href: '/lissages/lissage-bresilien' },
-    { label: 'Kératine', href: '/lissages/keratine' },
-    { label: 'Protéines', href: '/lissages/proteines' },
+    { label: 'Lissage Tanin', href: '/lissages/lissage-tanin' },
+    { label: 'Kits Mini Lissage', href: '/lissages/kits-mini-lissages' },
     { label: 'Botox Capillaire', href: '/lissages/botox-capillaire' },
-    { label: 'Tanino', href: '/lissages/tanino' },
-    { label: 'Lissage Japonais', href: '/lissages/lissage-japonais' },
+    { label: 'Lisseurs', href: '/lissages/lisseurs' },
+    { label: 'Packs Lissages', href: '/lissages/pack-lissages' },
   ]},
   { label: 'Soins Capillaires', href: '/soins-capillaires', subItems: [
-    { label: 'Shampoings', href: '/soins-capillaires/shampoings' },
+    { label: 'Shampooings', href: '/soins-capillaires/shampooings' },
     { label: 'Masques Capillaires', href: '/soins-capillaires/masques' },
     { label: 'Huiles Capillaires', href: '/soins-capillaires/huiles' },
     { label: 'Sérums', href: '/soins-capillaires/serums' },
     { label: 'Sprays Protecteurs', href: '/soins-capillaires/sprays' },
+    { label: 'Packs Capillaires', href: '/soins-capillaires/pack-capillaires' },
   ]},
-  { label: 'Maquillage', href: '/maquillage', subItems: [
-    { label: 'Fond de Teint', href: '/maquillage/fond-de-teint' },
-    { label: 'Rouge à Lèvres', href: '/maquillage/rouge-a-levres' },
-    { label: 'Mascara', href: '/maquillage/mascara' },
-    { label: 'Fards à Paupières', href: '/maquillage/fards-paupieres' },
-    { label: 'Blush', href: '/maquillage/blush' },
-    { label: 'Eyeliner', href: '/maquillage/eyeliner' },
+  { label: 'Coloration', href: '/coloration', subItems: [
+    { label: 'Poudres Décolorantes', href: '/coloration/poudres-decolorantes' },
+
   ]},
   { label: 'Soins Visage', href: '/soins-visage', subItems: [
     { label: 'Crèmes Hydratantes', href: '/soins-visage/cremes-hydratantes' },

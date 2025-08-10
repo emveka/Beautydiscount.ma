@@ -1,4 +1,4 @@
-// components/home/ProductCategoryHome.tsx - Optimisé avec ProductCardWithCart
+// components/home/ProductCategoryHome.tsx - Optimisé avec ProductCardWithCart + Ordre Aléatoire
 'use client'
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -40,15 +40,39 @@ interface ProductCategoryHomeProps {
   backgroundColor?: string;         // Couleur de fond optionnelle (par défaut: blanc)
   titleColor?: string;              // Couleur du titre optionnelle (par défaut: gray-800)
   viewAllText?: string;             // Texte du lien "Voir plus" (par défaut: "Voir plus")
+  randomize?: boolean;              // 🆕 Activer l'ordre aléatoire (par défaut: true)
 }
 
 /**
- * ProductCategoryHome - Utilise maintenant ProductCardWithCart pour la cohérence
+ * 🎲 Fonction pour mélanger un tableau de façon aléatoire (algorithme Fisher-Yates)
+ * Cette fonction est plus performante et plus équitable que sort(() => Math.random() - 0.5)
+ * 
+ * @param array - Le tableau à mélanger
+ * @returns Le tableau mélangé
+ */
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]; // Copie pour ne pas modifier l'original
+  
+  // Algorithme de Fisher-Yates pour un mélange équitable
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    // Générer un index aléatoire entre 0 et i
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    
+    // Échanger les éléments
+    [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]];
+  }
+  
+  return shuffled;
+}
+
+/**
+ * ProductCategoryHome - Utilise maintenant ProductCardWithCart pour la cohérence + Ordre Aléatoire
  * 
  * ✅ Utilise le vrai composant ProductCardWithCart optimisé mobile
  * ✅ Tailles de boutons cohérentes sur tous les écrans
  * ✅ Responsive design uniforme
  * ✅ Comportement du panier identique partout
+ * ✅ 🆕 Ordre aléatoire des produits pour plus de variété
  */
 const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
   title,
@@ -56,7 +80,8 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
   category,
   backgroundColor = 'bg-white',
   titleColor = 'text-gray-800',
-  viewAllText = 'Voir plus'
+  viewAllText = 'Voir plus',
+  randomize = true // 🆕 Par défaut, on active l'ordre aléatoire
 }) => {
   
   const [products, setProducts] = useState<Product[]>([]);
@@ -66,6 +91,7 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
   /**
    * Récupère les produits depuis Firebase
    * Filtre par catégorie/sous-catégorie et limite à 6 résultats
+   * 🆕 Applique un ordre aléatoire si activé
    */
   useEffect(() => {
     const fetchProducts = async () => {
@@ -76,12 +102,12 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
         // Création de la requête Firebase
         const productsRef = collection(db, 'products');
         
-        // Récupérer tous les produits actifs et filtrer côté client
-        // car Firebase ne peut pas filtrer dans un tableau d'objets facilement
+        // Récupérer plus de produits pour avoir un meilleur pool aléatoire
+        // 🎯 Augmenté de 50 à 100 pour plus de variété dans le mélange
         const q = query(
           productsRef,
           where('inStock', '==', true), // Seuls les produits en stock
-          limit(50) // Plus large pour ensuite filtrer côté client
+          limit(100) // Plus large pour ensuite filtrer et mélanger côté client
         );
         
         // Exécution de la requête
@@ -119,10 +145,19 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
           }
         });
         
-        // Limiter à 6 produits après filtrage
-        setProducts(productsData.slice(0, 6));
+        // 🎲 Appliquer l'ordre aléatoire AVANT de limiter à 6
+        // Cela garantit qu'on sélectionne 6 produits aléatoires parmi tous ceux disponibles
+        let finalProducts = productsData;
         
-        console.log(`Produits trouvés pour "${category}":`, productsData.length);
+        if (randomize && productsData.length > 0) {
+          finalProducts = shuffleArray(productsData);
+          console.log(`🎲 Produits mélangés aléatoirement pour "${category}"`);
+        }
+        
+        // Limiter à 6 produits après le mélange aléatoire
+        setProducts(finalProducts.slice(0, 6));
+        
+        console.log(`Produits trouvés pour "${category}":`, productsData.length, `(affichés: ${Math.min(finalProducts.length, 6)})`);
         
       } catch (err) {
         console.error(`Erreur lors du chargement des produits ${category}:`, err);
@@ -133,7 +168,7 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
     };
 
     fetchProducts();
-  }, [category]);
+  }, [category, randomize]); // 🆕 Ajouter randomize aux dépendances
 
   // État de chargement
   if (loading) {
@@ -228,7 +263,7 @@ const ProductCategoryHome: React.FC<ProductCategoryHomeProps> = ({
           </Link>
         </div>
 
-        {/* 🎯 Grille de produits avec ProductCardWithCart optimisé */}
+        {/* 🎯 Grille de produits avec ProductCardWithCart optimisé + Ordre Aléatoire */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
           {products.map((product) => (
             <div key={product.productId} className="flex justify-center">
