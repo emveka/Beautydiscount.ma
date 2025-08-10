@@ -240,7 +240,8 @@ const handleBuyNow = async (e: React.MouseEvent) => {
 {/* 🎯 Nom du produit avec lien - taille fluide */}
 <Link 
   href={`/product/${slug}`} 
-  className="block font-bold text-gray-800 text-[clamp(12px,1vw,16px)] hover:text-rose-400 transition-colors duration-200 leading-snug mb-2 sm:mb-3 h-10 overflow-hidden"
+  className="block font-bold text-gray-800 text-[clamp(12px,1vw,16px)] hover:text-rose-400 transition-colors duration-200 leading-snug mb-2 sm:mb-3 h-12 overflow-hidden"
+
 >
   <span className="line-clamp-2 font-semibold">
     {name}

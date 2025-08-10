@@ -51,8 +51,8 @@ const MENU_ITEMS: MenuItem[] = [
     { label: 'Accessoires Nail Art', href: '/onglerie/accessoires-nail-art' },
   ]},
   { label: 'Accessoires', href: '/accessoires', subItems: [
-    { label: 'Pinceaux Maquillage', href: '/accessoires/pinceaux-maquillage' },
-    { label: 'Éponges & Blenders', href: '/accessoires/eponges-blenders' },
+    { label: 'Appareils Electriques', href: '/accessoires/appareils-electriques' },
+    { label: 'Tensionmetre', href: '/accessoires/tensiometre' },
     { label: 'Miroirs', href: '/accessoires/miroirs' },
     { label: 'Trousses Beauté', href: '/accessoires/trousses-beaute' },
   ]},
