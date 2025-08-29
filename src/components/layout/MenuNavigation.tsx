@@ -89,7 +89,7 @@ const MenuNavigation: React.FC = () => {
                       transition-colors duration-200
                     "
                   >
-                    {/* ⬇️ Empêche toute coupure + police qui s’adapte */}
+                    {/* ⬇️ Empêche toute coupure + police qui s'adapte */}
                     <span className="
                       whitespace-nowrap leading-none tracking-tight
                       text-[clamp(12px,0.95vw,16px)]
@@ -101,30 +101,31 @@ const MenuNavigation: React.FC = () => {
                     ) : null}
                   </Link>
 
-                  {/* Dropdown */}
+                  {/* Dropdown - DESIGN MODIFIÉ */}
                   {item.subItems?.length && activeDropdown === item.label && (
                     <div className="
                       absolute left-0 top-full bg-white border border-gray-200 shadow-xl rounded-b-lg
                       min-w-[380px] xl:min-w-[520px] 2xl:min-w-[560px]
                       max-w-[640px] py-5 xl:py-6 px-6 xl:px-8 z-50
                     ">
+                      {/* Header simplifié - Plus de description */}
                       <div className="border-b border-pink-200 pb-3 mb-4">
                         <h3 className="font-bold text-rose-400
                           text-[clamp(13px,1.05vw,18px)] leading-none tracking-tight">
                           {item.label}
                         </h3>
-                        <p className="text-[12px] text-gray-500 mt-1">
-                          {item.subItems.length} sous-catégories disponibles
-                        </p>
+                        {/* ❌ Suppression de la ligne "X sous-catégories disponibles" */}
                       </div>
 
+                      {/* Grille des sous-catégories avec font-bold */}
                       <div className="grid grid-cols-2 gap-x-5 gap-y-2">
                         {item.subItems.map((sub) => (
                           <Link
                             key={sub.label}
                             href={sub.href}
                             className="
-                              block px-2 py-2 rounded-md transition-all duration-200 font-medium
+                              block px-2 py-2 rounded-md transition-all duration-200 
+                              font-semibold
                               hover:text-rose-400 hover:bg-pink-50
                               text-[clamp(12px,0.9vw,14px)] leading-none tracking-tight
                               text-gray-700

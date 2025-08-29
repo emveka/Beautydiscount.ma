@@ -257,7 +257,7 @@ export default function HomePage() {
           
           <ProductCategoryHome 
             title="Nos Packs Capillaires"
-            categoryLink="/pack-capillaires"
+            categoryLink="/soins-capillaires/pack-capillaires"
             category="pack-capillaires"
             backgroundColor="bg-gray-50"
             titleColor="text-rose-400"

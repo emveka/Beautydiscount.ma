@@ -16,7 +16,7 @@ const Banner: React.FC = () => {
           
           {/* Image responsive */}
           <Image
-            src="/Banner22-1.webp"
+            src="/poudres.webp"
             alt="SALVATORE Professional Cosmetics - Lissage TANINO"
             fill
             className="object-cover"

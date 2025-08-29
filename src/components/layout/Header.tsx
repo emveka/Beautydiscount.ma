@@ -23,45 +23,30 @@ const MENU_ITEMS: MenuItem[] = [
     href: '/lissages',
     subItems: [
       { label: 'Lissage Brésilien', href: '/lissages/lissage-bresilien' },
-      { label: 'Kératine', href: '/lissages/keratine' },
-      { label: 'Protéines', href: '/lissages/proteines' },
-      { label: 'Botox Capillaire', href: '/lissages/botox-capillaire' },
-      { label: 'Tanino', href: '/lissages/tanino' },
-      { label: 'Lissage Japonais', href: '/lissages/lissage-japonais' }
+    { label: 'Lissage Tanin', href: '/lissages/lissage-tanin' },
+    { label: 'Kits Mini Lissage', href: '/lissages/kits-mini-lissages' },
+    { label: 'Botox Capillaire', href: '/lissages/botox-capillaire' },
+    { label: 'Lisseurs', href: '/lissages/lisseurs' },
+    { label: 'Packs Lissages', href: '/lissages/pack-lissages' }
     ]
   },
   {
     label: 'Soins Capillaires',
     href: '/soins-capillaires',
     subItems: [
-      { label: 'Shampoings', href: '/soins-capillaires/shampoings' },
-      { label: 'Masques Capillaires', href: '/soins-capillaires/masques' },
-      { label: 'Huiles Capillaires', href: '/soins-capillaires/huiles' },
-      { label: 'Sérums', href: '/soins-capillaires/serums' },
-      { label: 'Sprays Protecteurs', href: '/soins-capillaires/sprays' }
+      { label: 'Shampooings', href: '/soins-capillaires/shampooings' },
+    { label: 'Masques Capillaires', href: '/soins-capillaires/masques' },
+    { label: 'Huiles Capillaires', href: '/soins-capillaires/huiles' },
+    { label: 'Sérums', href: '/soins-capillaires/serums' },
+    { label: 'Sprays Protecteurs', href: '/soins-capillaires/sprays' },
+    { label: 'Packs Capillaires', href: '/soins-capillaires/pack-capillaires' }
     ]
   },
   {
-    label: 'Parfums',
-    href: '/parfums',
+    label: 'Coloration',
+    href: '/coloration',
     subItems: [
-      { label: 'Parfums Femme', href: '/parfums/femme' },
-      { label: 'Parfums Homme', href: '/parfums/homme' },
-      { label: 'Parfums Unisexe', href: '/parfums/unisexe' },
-      { label: 'Eaux de Toilette', href: '/parfums/eau-de-toilette' },
-      { label: 'Eaux de Parfum', href: '/parfums/eau-de-parfum' }
-    ]
-  },
-  {
-    label: 'Maquillage',
-    href: '/maquillage',
-    subItems: [
-      { label: 'Fond de Teint', href: '/maquillage/fond-de-teint' },
-      { label: 'Rouge à Lèvres', href: '/maquillage/rouge-a-levres' },
-      { label: 'Mascara', href: '/maquillage/mascara' },
-      { label: 'Fards à Paupières', href: '/maquillage/fards-paupieres' },
-      { label: 'Blush', href: '/maquillage/blush' },
-      { label: 'Eyeliner', href: '/maquillage/eyeliner' }
+      { label: 'Poudres Décolorantes', href: '/coloration/poudres-decolorantes' },
     ]
   },
   {
@@ -69,10 +54,10 @@ const MENU_ITEMS: MenuItem[] = [
     href: '/soins-visage',
     subItems: [
       { label: 'Crèmes Hydratantes', href: '/soins-visage/cremes-hydratantes' },
-      { label: 'Sérums Anti-âge', href: '/soins-visage/serums-anti-age' },
-      { label: 'Nettoyants', href: '/soins-visage/nettoyants' },
-      { label: 'Masques Visage', href: '/soins-visage/masques' },
-      { label: 'Contour des Yeux', href: '/soins-visage/contour-yeux' }
+    { label: 'Sérums Anti-âge', href: '/soins-visage/serums-anti-age' },
+    { label: 'Nettoyants', href: '/soins-visage/nettoyants' },
+    { label: 'Masques Visage', href: '/soins-visage/masques' },
+    { label: 'Contour des Yeux', href: '/soins-visage/contour-yeux' },
     ]
   },
   {
@@ -80,9 +65,9 @@ const MENU_ITEMS: MenuItem[] = [
     href: '/cosmetique-coreen',
     subItems: [
       { label: 'K-Beauty Routine', href: '/cosmetique-coreen/k-beauty-routine' },
-      { label: 'Masques Coréens', href: '/cosmetique-coreen/masques' },
-      { label: 'Sérums K-Beauty', href: '/cosmetique-coreen/serums' },
-      { label: 'BB & CC Creams', href: '/cosmetique-coreen/bb-cc-creams' }
+    { label: 'Masques Coréens', href: '/cosmetique-coreen/masques' },
+    { label: 'Sérums K-Beauty', href: '/cosmetique-coreen/serums' },
+    { label: 'BB & CC Creams', href: '/cosmetique-coreen/bb-cc-creams' },
     ]
   },
   {
@@ -90,21 +75,22 @@ const MENU_ITEMS: MenuItem[] = [
     href: '/onglerie',
     subItems: [
       { label: 'Vernis à Ongles', href: '/onglerie/vernis-ongles' },
-      { label: 'Base & Top Coat', href: '/onglerie/base-top-coat' },
-      { label: 'Soins des Ongles', href: '/onglerie/soins-ongles' },
-      { label: 'Accessoires Nail Art', href: '/onglerie/accessoires-nail-art' }
+    { label: 'Base & Top Coat', href: '/onglerie/base-top-coat' },
+    { label: 'Soins des Ongles', href: '/onglerie/soins-ongles' },
+    { label: 'Accessoires Nail Art', href: '/onglerie/accessoires-nail-art' },
     ]
   },
   {
     label: 'Accessoires',
     href: '/accessoires',
     subItems: [
-      { label: 'Pinceaux Maquillage', href: '/accessoires/pinceaux-maquillage' },
-      { label: 'Éponges & Blenders', href: '/accessoires/eponges-blenders' },
-      { label: 'Miroirs', href: '/accessoires/miroirs' },
-      { label: 'Trousses Beauté', href: '/accessoires/trousses-beaute' }
+      { label: 'Appareils Electriques', href: '/accessoires/appareils-electriques' },
+    { label: 'Tensiometre', href: '/accessoires/tensiometre' },
+    { label: 'Miroirs', href: '/accessoires/miroirs' },
+    { label: 'Trousses Beauté', href: '/accessoires/trousses-beaute' },
+    { label: 'Trousses Médicales', href: '/accessoires/trousses-medicales' }
     ]
-  }
+  },
 ];
 
 /**
